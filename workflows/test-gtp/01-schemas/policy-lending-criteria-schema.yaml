@@ -32,8 +32,6 @@ schema_definition:
             type: string
         max_ccj_count_3_years:
             type: string
-        max_ccj_value:
-            type: number
         max_gifted_deposit_percentage:
             type: number
         max_interest_only_ltv:
