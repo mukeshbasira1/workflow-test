@@ -1,0 +1,63 @@
+created_by: mukesh@mightybot.ai
+description: Represents a work-from-home (WFH) expense/reimbursement claim submission, including extracted receipt data, policy evaluation results, and validation outcomes for audit and appeal.
+is_active: true
+is_primary: false
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        amount_requested:
+            type: number
+        application_id:
+            type: string
+        claim_id:
+            type: string
+        created_at:
+            type: string
+        currency:
+            type: string
+        expense_category:
+            type: string
+        expense_date:
+            type: string
+        expense_purpose:
+            type: string
+        extracted_receipt:
+            type: object
+        notes:
+            type: string
+        owner_department:
+            type: string
+        policy_evaluations:
+            type: array
+        receipt_documents:
+            type: array
+        requester_id:
+            type: string
+        requester_name:
+            type: string
+        status:
+            type: string
+        submitted_at:
+            type: string
+        updated_at:
+            type: string
+        validation_results:
+            type: array
+    required:
+        - claim_id
+        - application_id
+        - requester_id
+        - amount_requested
+        - currency
+        - expense_date
+        - expense_category
+        - receipt_documents
+        - status
+        - submitted_at
+    type: object
+tenant_id: 0aedf8cd-f286-4177-b61c-8ceca47eea47
+title: wfh student policy
+type: API_REQUEST
+version: "1.0"
+workflow_id: deef31de-6238-4152-80e8-482cc5362909
