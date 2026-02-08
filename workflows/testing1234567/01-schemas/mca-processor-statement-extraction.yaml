@@ -6,6 +6,8 @@ last_modified_by: mukesh@mightybot.ai
 schema_definition:
     additionalProperties: false
     properties:
+        advance_ratio:
+            type: string
         amex_percentage:
             type: number
         average_ticket:
