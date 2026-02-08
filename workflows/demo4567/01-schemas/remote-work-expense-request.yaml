@@ -1,0 +1,33 @@
+created_by: mukesh@mightybot.ai
+description: Schema for submitting remote work equipment purchases and expense reimbursements with PRICE rule validation
+is_active: true
+is_primary: true
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        approval_required:
+            type: boolean
+        employee_id:
+            type: string
+        gl_code:
+            type: string
+        invoice_date:
+            type: string
+        item_category:
+            type: string
+        receipt_url:
+            type: string
+        requested_amount:
+            type: number
+    required:
+        - employee_id
+        - invoice_date
+        - item_category
+        - requested_amount
+    type: object
+tenant_id: 22797ac5-d4a9-4a91-b730-16c2adef9018
+title: Remote Work Expense Request
+type: API_REQUEST
+version: "1.0"
+workflow_id: 2dfafe5c-9649-49ab-9f1d-a17909381227
