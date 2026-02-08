@@ -8,10 +8,18 @@ schema_definition:
     properties:
         address:
             type: string
+        annualincome:
+            type: number
         applicantname:
             type: string
+        creditscore:
+            type: integer
         dob:
             format: date
+            type: string
+        interestrate:
+            type: number
+        loantype:
             type: string
         phonenumber:
             type: string
