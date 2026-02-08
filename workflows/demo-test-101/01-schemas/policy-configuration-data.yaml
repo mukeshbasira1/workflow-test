@@ -8,6 +8,9 @@ schema_definition:
     properties:
         applicantname:
             type: string
+        dob:
+            format: date
+            type: string
         policy_name:
             type: string
         policy_type:
