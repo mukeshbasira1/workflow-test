@@ -7,7 +7,7 @@ schema_definition:
     additionalProperties: false
     properties:
         creditscore:
-            type: integer
+            type: string
         effective_date:
             type: string
         expiration_date:
