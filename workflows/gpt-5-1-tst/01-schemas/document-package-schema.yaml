@@ -22,6 +22,8 @@ schema_definition:
             type: string
         inspection_percent_complete:
             type: number
+        inspection_photo_count:
+            type: string
         is_conditional_waiver:
             type: boolean
         prior_draw_reference:
