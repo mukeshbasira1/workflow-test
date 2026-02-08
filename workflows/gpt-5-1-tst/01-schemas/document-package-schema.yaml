@@ -10,6 +10,8 @@ schema_definition:
             type: number
         budget_line_item_id:
             type: string
+        critical_issues_count:
+            type: string
         document_id:
             type: string
         draw_id:
