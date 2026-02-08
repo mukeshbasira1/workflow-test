@@ -1,7 +1,7 @@
 created_by: mukesh@mightybot.ai
 description: Flat schema for configuring a single policy/SOP check used by the policy agent (e.g., contingency limits, interest reserve sufficiency, lien waiver requirements).
 is_active: true
-is_primary: true
+is_primary: false
 last_modified_by: mukesh@mightybot.ai
 schema_definition:
     additionalProperties: false
@@ -63,5 +63,5 @@ schema_definition:
         - evaluation_scope
     type: object
 title: Policy Rule
-type: WEBHOOK
+type: FILE_EXTRACTION
 version: "1.0"
