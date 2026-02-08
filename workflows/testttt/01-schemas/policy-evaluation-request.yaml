@@ -26,6 +26,8 @@ schema_definition:
             type: object
         timeout_ms:
             type: string
+        uuu:
+            type: string
     required:
         - action
         - subject
