@@ -47,5 +47,5 @@ variable_mappings:
     mappings:
         - source_type: webhook_field
           variable_name: filter
-          webhook_field_path: critical_issues_count
+          webhook_field_path: extraction_confidence
 variables: null
