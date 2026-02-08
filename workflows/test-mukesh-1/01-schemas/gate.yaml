@@ -1,0 +1,42 @@
+created_by: mukesh@mightybot.ai
+description: null
+is_active: true
+is_primary: false
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        approved:
+            type: boolean
+        comments:
+            type: string
+        decision_timestamp:
+            type: string
+        gate_reason:
+            type: string
+        gate_status:
+            type: string
+        gate_type:
+            type: string
+        request_id:
+            type: string
+        requestor_id:
+            type: string
+        requestor_name:
+            type: string
+        reviewer_id:
+            type: string
+        reviewer_name:
+            type: string
+        timestamp:
+            type: string
+    required:
+        - request_id
+        - timestamp
+        - requestor_id
+        - gate_type
+        - gate_status
+    type: object
+title: gate
+type: API_REQUEST
+version: "1.0"
