@@ -63,5 +63,5 @@ schema_definition:
         - evaluation_scope
     type: object
 title: Policy Rule
-type: API_REQUEST
+type: FILE_EXTRACTION
 version: "1.0"
