@@ -1,0 +1,203 @@
+api_config:
+    postman_metadata:
+        collection_id: 92a85d0e-51e7-47da-9f83-c45dcb1cdf24
+        collection_name: PayPal APIs
+        folder_path:
+            - Payment Method Tokens
+            - Vault Payment Source - Payment token
+        original_name: List all payment tokens for customer
+    query_params:
+        - description: A non-negative, non-zero integer indicating the maximum number of results to return at one time.
+          disabled: true
+          key: page_size
+          value: "5"
+        - description: A non-negative, non-zero integer representing the page of the results.
+          disabled: true
+          key: page
+          value: "1"
+        - description: A boolean indicating total number of items (total_items) and pages (total_pages) are expected to be returned in the response.
+          disabled: true
+          key: total_required
+          value: "false"
+        - disabled: false
+          key: customer_id
+          value: '{{vault_customer_id}}'
+    variables:
+        - key: PLEASE NOTE -->
+          type: string
+          value: "< PayPal Public Collection comes with following default public set of credentials stored at the Collection level. \nYou may choose to override these values via environment level variables. You may bring your own credentials from PayPal Developer Dashboard there."
+        - key: base_url
+          type: string
+          value: https://api-m.sandbox.paypal.com
+        - key: client_id
+          type: string
+          value: AUv8rrc_P-EbP2E0mpb49BV7rFt3Usr-vdUZO8VGOnjRehGHBXkSzchr37SYF2GNdQFYSp72jh5QUhzG
+        - key: client_secret
+          type: string
+          value: EMnAWe06ioGtouJs7gLYT9chK9-2jJ--7MKRXpI8FesmY_2Kp-d_7aCqff7M9moEJBvuXoBO4clKtY0v
+        - key: managed_path_client_id
+          type: string
+          value: ASJ7ZDtuc9fT8cDWY-EEt6xtnUCe0QiJa9Zn5Eme_rb3SfVIlbWZlu4KU87hKKFl8wxUCMRZ-HP49FTd
+        - key: managed_path_client_secret
+          type: string
+          value: EN3AlrRVld1MnsZwYK1o2RJAxSAdv9DnrwNQCo3s3HOm45NAFQtzQhc4U5HsmwBpikVfX8uXUF7Ajb3t
+        - key: access_token
+          type: string
+          value: ""
+        - key: access_token_expiry
+          type: string
+          value: ""
+        - key: access_token_for
+          type: string
+          value: ""
+        - key: authorization_id
+          type: string
+          value: ""
+        - key: billing_plan_id
+          type: string
+          value: ""
+        - key: capture_id
+          type: string
+          value: ""
+        - key: dispute_id
+          type: string
+          value: ""
+        - key: event_auth_algo
+          type: string
+          value: ""
+        - key: event_cert_url
+          type: string
+          value: ""
+        - key: event_id
+          type: string
+          value: ""
+        - key: event_transmission_id
+          type: string
+          value: ""
+        - key: event_transmission_sig
+          type: string
+          value: ""
+        - key: event_transmission_time
+          type: string
+          value: ""
+        - key: event_webhook_payload
+          type: string
+          value: ""
+        - key: invoice_id
+          type: string
+          value: ""
+        - key: invoice_payment_id
+          type: string
+          value: ""
+        - key: invoice_template_id
+          type: string
+          value: ""
+        - key: managed_path_access_token
+          type: string
+          value: ""
+        - key: managed_path_access_token_expiry
+          type: string
+          value: ""
+        - key: managed_path_access_token_for
+          type: string
+          value: ""
+        - key: managed_path_account_id
+          type: string
+          value: ""
+        - key: managed_path_external_id
+          type: string
+          value: ""
+        - key: managed_path_organization
+          type: string
+          value: us
+        - key: managed_path_person_id
+          type: string
+          value: ""
+        - key: order_id
+          type: string
+          value: ""
+        - key: order_intent
+          type: string
+          value: CAPTURE
+        - key: payment_token_id
+          type: string
+          value: ""
+        - key: payout_batch_id
+          type: string
+          value: ""
+        - key: payout_item_id
+          type: string
+          value: ""
+        - key: paypal_auth_assertion
+          type: string
+          value: ""
+        - key: paypal_client_metadata_Id
+          type: string
+          value: ""
+        - key: paypal_partner_attribution_id
+          type: string
+          value: TEST_ATTRIBUTION_ID
+        - key: prefer_representation_detailed
+          type: string
+          value: return=representation
+        - key: prefer_representation_min
+          type: string
+          value: return=minimal
+        - key: product_id
+          type: string
+          value: "1645840190"
+        - key: refund_id
+          type: string
+          value: ""
+        - key: setup_token_id
+          type: string
+          value: ""
+        - key: subscription_id
+          type: string
+          value: ""
+        - key: todays_date
+          type: string
+          value: ""
+        - key: tracking_id
+          type: string
+          value: ""
+        - key: tracking_number
+          type: string
+          value: ""
+        - key: vault_customer_id
+          type: string
+          value: ""
+        - key: web_profile_id
+          type: string
+          value: ""
+        - key: webhook_id
+          type: string
+          value: ""
+        - key: webhook_site_token
+          type: string
+          value: ""
+        - key: webhook_url
+          type: string
+          value: ""
+        - key: paypal_postman_scripts
+          type: string
+          value: '!function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t():"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports.PayPalPostmanUtils=t():e.PayPalPostmanUtils=t()}(this,()=>(()=>{"use strict";var e={d:(t,o)=>{for(var n in o)e.o(o,n)&&!e.o(t,n)&&Object.defineProperty(t,n,{enumerable:!0,get:o[n]})},o:(e,t)=>Object.prototype.hasOwnProperty.call(e,t)},t={};function o(e,t,o,a){const s={alg:o},r={iss:e,...t},c=`${n(JSON.stringify(s))}.${n(JSON.stringify(r))}`;return`${c}.${o&&"none"!==o?n(CryptoJS.HmacSHA256(c,a||"").toString()):""}`}function n(e){return Buffer.from(e).toString("base64").replace(/=+$/,"").replace(/\+/g,"-").replace(/\//g,"_")}e.d(t,{default:()=>a});const a={needsNewAccessToken:function({accessTokenVar:e,accessTokenExpiryVar:t,forClientIdVar:o,clientIdVar:n}){const a=pm.collectionVariables.get(t),s=pm.collectionVariables.get(e),r=pm.variables.get(n),c=pm.collectionVariables.get(o),i=a?parseInt(a,10):0,l=!a||i<=Date.now(),p=!s||!c||c!==r;return!pm.request.url.path.join("/").includes("/oauth2/token")&&(l||p)},refreshAccessToken:function(e,t){const{accessTokenVar:o,accessTokenExpiryVar:n,forClientIdVar:a,clientIdVar:s,clientSecretVar:r,baseUrlVar:c}=e,i=pm.variables.get(s),l=pm.variables.get(r),p={url:pm.variables.get(c)+"/v1/oauth2/token",method:"POST",header:{"content-type":"application/x-www-form-urlencoded",authorization:"Basic "+Buffer.from(i+":"+l).toString("base64")},body:{mode:"urlencoded",urlencoded:[{key:"grant_type",value:"client_credentials"}]}};pm.collectionVariables.unset(o),pm.collectionVariables.unset(n),pm.collectionVariables.unset(a),pm.sendRequest(p,function(e,s){if(200===s.code){const e=s.json();console.log("Saving the access_token"),pm.collectionVariables.set(o,e.access_token);const t=new Date;t.setSeconds(t.getSeconds()+e.expires_in),pm.collectionVariables.set(n,t.getTime()),pm.collectionVariables.set(a,i)}else console.error("Failed to obtain access_token",e,s.code,s.headers.get("Paypal-Debug-Id"),s.json());t&&t()})},storeAccessToken:function(e,t){var o;const{accessTokenVar:n,accessTokenExpiryVar:a,forClientIdVar:s,clientIdVar:r}=t,c=pm.variables.get(r);pm.collectionVariables.set(n,e.access_token);const i=new Date;i.setSeconds(i.getSeconds()+e.expires_in),pm.collectionVariables.set(a,i.getTime()),pm.collectionVariables.set(s,c),(null===(o=e.client_metadata)||void 0===o?void 0:o.display_name)&&console.log("Logged in using App =",e.client_metadata.display_name)},isSandbox:function(){return pm.variables.get("base_url").includes("sandbox.paypal.com")},getPayPalDebugId:function(){if(pm&&pm.response&&pm.response.headers)return pm.response.headers.get("Paypal-Debug-Id")},base64Url:n,getJWT:o,getAuthAssertionFor:function(e,t){return o(e,{payer_id:t},"none")}};return t.default})());'
+authentication_type: BEARER_TOKEN
+base_url: '{{base_url}}/v3/vault/payment-tokens'
+connection_pool_size: null
+connection_string_encrypted: null
+created_by: mukesh@mightybot.ai
+headers:
+    Content-Type: application/json
+    PayPal-Request-Id: '{{$guid}}'
+http_method: GET
+is_connected: false
+key_name: null
+last_error: null
+last_sync: null
+provider: null
+response_schema_id: null
+secret_encrypted: gAAAAABpHF7Y4ZwAiYzrfzt4zQFsUwHNOHFX_dgolQ8kPt1zTi-mABmgDuUXlVLCHfEZi0zrNX9wlP2PHUsdfLeGJP6yVe5KEYhOQ7qBBKaa19vCZ6ELRDk=
+ssl_enabled: false
+type: API
+workflow_id: deef31de-6238-4152-80e8-482cc5362909
