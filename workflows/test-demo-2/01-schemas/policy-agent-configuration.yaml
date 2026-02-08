@@ -6,6 +6,8 @@ last_modified_by: mukesh@mightybot.ai
 schema_definition:
     additionalProperties: false
     properties:
+        applicantname:
+            type: string
         classification_rules:
             type: array
         convert_unsupported_files:
