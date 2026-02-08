@@ -1,0 +1,33 @@
+# Agent Configuration
+agent_config:
+    architecture: react
+    data_sources: []
+    max_iterations: 30
+    max_replan: 3
+    model_name: claude-sonnet-4-5-20250929
+    models: null
+    planning_rules:
+        - 'For Construction Progress Match Policy: regardless of outcome (approve, reject, needs_review), call ''Send Message to Channel'' via api_call tool with payload {"channel": "#construction-alerts", "text": "Policy {{policy_name}} outcome: {{outcome}}. Details: {{variance_percent || waiver_status}}."}. Optionally precede with GetDealDraws if context needed.'
+        - 'For Lien Waiver Completeness Policy: regardless of outcome (approve, reject, needs_review), call ''Send Message to Channel'' via api_call tool with payload {"channel": "#construction-alerts", "text": "Policy {{policy_name}} outcome: {{outcome}}. Details: {{variance_percent || waiver_status}}."}.'
+        - 'Use api_call tool for all data sources: GetDealDraws with {"dealId": "{{current_deal.id}}", "drawPeriod": "{{current_draw.period}}"}, Send Message to Channel with specified payloads and URL {{base_url}}/chat.postMessage.'
+        - If any call fails, log 'Failed to call {{data_source}} for {{policy_name}} outcome {{outcome}}' and do not retry or call further tools.
+        - 'Replace all placeholders with actual values from policy outputs: {{current_deal.id}}, {{current_draw.period}}, {{policy_name}}, {{outcome}}, {{variance_percent}}, {{waiver_status}}.'
+    prompts:
+        executor: Execute the plan step-by-step. Use api_call tool with exact request body payloads as specified. Do not deviate from templates. If a tool call fails, log the exact error message as instructed and stop further actions for that policy.
+        planner: Analyze the policy outcomes provided. Create a step-by-step plan to execute the required actions per planning_rules. For each policy (Construction Progress Match, Lien Waiver Completeness), determine if GetDealDraws is needed for context, then call Send Message to Channel with the exact payload template for the outcome. Output plan as numbered steps with specific api_call invocations.
+        solver: 'After execution, summarize the outcomes: which policies were processed, messages sent, any failures logged. Confirm all required actions completed.'
+        system: 'You are a react agent that executes actions based on policy evaluation outcomes for construction draw requests. Policies output: approve, reject, or needs_review. Use available data sources (GetDealDraws and Send Message to Channel) mapped to tools. Call data sources only when specified for each policy outcome. Always include required parameters using templates like {{current_deal.id}}, {{current_draw.period}}, {{policy_name}}, {{outcome}}, {{variance_percent}}, or {{waiver_status}}. Handle errors by logging the failure and proceeding without further calls. For Send Message to Channel, use URL {{base_url}}/chat.postMessage in api_call.'
+    roles:
+        developer:
+            description: Policy Workflow Executor that processes construction draw request policy evaluation results and triggers appropriate notifications or data fetches using available tools.
+            permissions:
+                - execute_tools
+            style: Precise, methodical, template-driven. Always use exact payload templates with placeholders. Handle errors by logging only.
+    system_name: Construction Draw Policy Workflow Agent
+    temperature: 0
+    tool_names:
+        - api_call
+    tools: []
+architecture: react
+created_by: mukesh@mightybot.ai
+updated_by: null
