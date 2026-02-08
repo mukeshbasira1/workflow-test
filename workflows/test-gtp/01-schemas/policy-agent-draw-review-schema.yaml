@@ -36,6 +36,8 @@ schema_definition:
             type: array
         exceptions_flagged:
             type: boolean
+        funds_transferred_date:
+            type: string
         hard_cost_variance:
             type: number
         inspection_report_received:
@@ -69,11 +71,11 @@ schema_definition:
         soft_cost_variance:
             type: number
     required:
-        - draw_id
         - deal_id
-        - review_status
+        - draw_id
         - review_date
         - reviewer_id
+        - review_status
     type: object
 title: Policy Agent Draw Review Schema
 type: API_REQUEST
