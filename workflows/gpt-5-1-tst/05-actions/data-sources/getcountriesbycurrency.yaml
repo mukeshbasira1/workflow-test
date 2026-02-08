@@ -39,5 +39,10 @@ response_schema_id: null
 ssl_enabled: false
 tool_mode: AUDIT
 type: GRAPHQL
-variable_mappings: null
+variable_mappings:
+    mappings:
+        - source_type: webhook_field
+          static_value: null
+          variable_name: currency
+          webhook_field_path: /webhooks/trigger/status
 variables: null
