@@ -13,7 +13,7 @@ schema_definition:
         applicantname:
             type: string
         creditscore:
-            type: integer
+            type: number
         dob:
             format: date
             type: string
