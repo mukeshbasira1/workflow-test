@@ -12,8 +12,6 @@ schema_definition:
             type: number
         applicantname:
             type: string
-        convert_unsupported_files:
-            type: boolean
         creditscore:
             type: integer
         dob:
