@@ -14,11 +14,15 @@ schema_definition:
             type: string
         draw_id:
             type: string
+        escalation_flag:
+            type: boolean
         expiration_date:
             type: string
         extraction_confidence:
             type: number
         file_name:
+            type: string
+        gps_verified_photos:
             type: string
         inspection_percent_complete:
             type: number
@@ -26,10 +30,14 @@ schema_definition:
             type: string
         is_conditional_waiver:
             type: boolean
+        line_item_photo_matches:
+            type: string
         prior_draw_reference:
             type: string
         retainage_percentage:
             type: number
+        revised_budget_date:
+            type: string
         risk_score:
             type: number
         status:
