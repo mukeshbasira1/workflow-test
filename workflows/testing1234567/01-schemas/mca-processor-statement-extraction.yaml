@@ -7,7 +7,7 @@ schema_definition:
     additionalProperties: false
     properties:
         advance_ratio:
-            type: string
+            type: number
         amex_percentage:
             type: number
         average_ticket:
