@@ -1,0 +1,44 @@
+created_by: mukesh@mightybot.ai
+description: Schema for tracking notification delivery, acknowledgments, and escalations per the Interactive Engagement requirements.
+is_active: true
+is_primary: false
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        ack_method:
+            type: string
+        ack_timestamp:
+            type: string
+        acknowledged:
+            type: boolean
+        alert_id:
+            type: string
+        channel_type:
+            type: string
+        escalation_timestamp:
+            type: string
+        escalation_triggered:
+            type: boolean
+        message_sent:
+            type: boolean
+        notification_id:
+            type: string
+        recipient_slack_id:
+            type: string
+        response_text:
+            type: string
+        sent_timestamp:
+            type: string
+        status:
+            type: string
+    required:
+        - status
+        - alert_id
+        - notification_id
+        - recipient_slack_id
+    type: object
+title: Notification and Escalation Tracking Schema
+type: API_REQUEST
+version: "1.0"
+workflow_id: 1f317657-8702-4e85-81ab-a13f24ca3c99
