@@ -8,6 +8,8 @@ schema_definition:
     properties:
         amount_extracted:
             type: number
+        budget_line_item_id:
+            type: string
         document_id:
             type: string
         document_type:
