@@ -6,6 +6,8 @@ last_modified_by: mukesh@mightybot.ai
 schema_definition:
     additionalProperties: false
     properties:
+        address:
+            type: string
         applicantname:
             type: string
         classification_rules:
