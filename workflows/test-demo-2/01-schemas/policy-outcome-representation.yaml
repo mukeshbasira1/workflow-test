@@ -18,6 +18,6 @@ schema_definition:
     type: object
 tenant_id: 0aedf8cd-f286-4177-b61c-8ceca47eea47
 title: Policy Outcome Representation
-type: API_REQUEST
+type: FILE_EXTRACTION
 version: "1.0"
 workflow_id: deef31de-6238-4152-80e8-482cc5362909
