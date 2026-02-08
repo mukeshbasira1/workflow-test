@@ -42,8 +42,6 @@ schema_definition:
             type: number
         max_ltv_percentage:
             type: number
-        max_missed_payments_12_months:
-            type: string
         max_mortgage_term_years:
             type: string
         max_portfolio_size:
