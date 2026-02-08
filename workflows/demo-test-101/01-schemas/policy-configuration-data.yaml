@@ -15,7 +15,6 @@ schema_definition:
         policy_type:
             type: string
     required:
-        - policy_id
         - policy_name
         - policy_type
     type: object
