@@ -18,7 +18,7 @@ schema_definition:
             format: date
             type: string
         interestrate:
-            type: number
+            type: string
         loantype:
             type: string
         phonenumber:
