@@ -1,0 +1,27 @@
+created_by: mukesh@mightybot.ai
+description: Schema representing the configuration of a policy including its attributes and status.
+is_active: true
+is_primary: true
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        is_active:
+            type: boolean
+        policy_id:
+            type: string
+        policy_name:
+            type: string
+        policy_type:
+            type: string
+    required:
+        - policy_id
+        - policy_name
+        - is_active
+        - policy_type
+    type: object
+tenant_id: 0aedf8cd-f286-4177-b61c-8ceca47eea47
+title: Policy Configuration Data
+type: API_REQUEST
+version: "1.0"
+workflow_id: 56b0ae10-0ff5-41d4-a46a-a7c4924c2073
