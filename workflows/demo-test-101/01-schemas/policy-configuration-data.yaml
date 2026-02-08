@@ -29,12 +29,12 @@ schema_definition:
         ssn/orpan:
             type: string
     required:
-        - policy_name
-        - policy_type
-        - applicantname
         - dob
         - ssn/orpan
         - phonenumber
+        - policy_name
+        - policy_type
+        - applicantname
     type: object
 tenant_id: 0aedf8cd-f286-4177-b61c-8ceca47eea47
 title: Policy Configuration Data
