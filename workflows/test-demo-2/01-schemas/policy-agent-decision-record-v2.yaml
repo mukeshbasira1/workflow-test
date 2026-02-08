@@ -1,0 +1,45 @@
+created_by: mukesh@mightybot.ai
+description: Detailed record of policy evaluation outcomes for audit and appeals; includes structured rule trigger information and standardized decision enumerations.
+is_active: true
+is_primary: false
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        aggregate_risk_score:
+            type: number
+        application_id:
+            type: string
+        approved_amount:
+            type: number
+        approved_term_months:
+            type: string
+        decision:
+            type: string
+        decision_date:
+            type: string
+        decision_id:
+            type: string
+        decision_reasons:
+            type: array
+        evidence:
+            type: array
+        notes:
+            type: string
+        policy_rules_triggered:
+            type: array
+        policy_version:
+            type: string
+        reviewer_id:
+            type: string
+    required:
+        - decision
+        - decision_id
+        - decision_date
+        - application_id
+    type: object
+tenant_id: 0aedf8cd-f286-4177-b61c-8ceca47eea47
+title: Policy Agent Decision Record (v2)
+type: API_REQUEST
+version: "1.0"
+workflow_id: deef31de-6238-4152-80e8-482cc5362909
