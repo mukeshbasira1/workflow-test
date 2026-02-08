@@ -9,7 +9,7 @@ schema_definition:
         address:
             type: string
         annualincome:
-            type: number
+            type: string
         applicantname:
             type: string
         creditscore:
