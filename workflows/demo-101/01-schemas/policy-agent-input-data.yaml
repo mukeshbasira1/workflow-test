@@ -6,6 +6,8 @@ last_modified_by: mukesh@mightybot.ai
 schema_definition:
     additionalProperties: false
     properties:
+        creditscore:
+            type: integer
         effective_date:
             type: string
         expiration_date:
@@ -20,8 +22,8 @@ schema_definition:
         - policy_id
         - policy_type
         - effective_date
-        - expiration_date
         - premium_amount
+        - expiration_date
     type: object
 tenant_id: 0aedf8cd-f286-4177-b61c-8ceca47eea47
 title: Policy Agent Input Data
