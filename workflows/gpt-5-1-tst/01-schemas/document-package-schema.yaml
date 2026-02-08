@@ -1,7 +1,7 @@
 created_by: mukesh@mightybot.ai
 description: null
 is_active: true
-is_primary: true
+is_primary: false
 last_modified_by: mukesh@mightybot.ai
 schema_definition:
     additionalProperties: false
@@ -51,5 +51,5 @@ schema_definition:
         - document_id
     type: object
 title: Document Package Schema
-type: WEBHOOK
+type: FILE_EXTRACTION
 version: "1.0"
