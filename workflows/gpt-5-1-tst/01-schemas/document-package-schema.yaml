@@ -20,6 +20,8 @@ schema_definition:
             type: number
         file_name:
             type: string
+        inspection_percent_complete:
+            type: number
         is_conditional_waiver:
             type: boolean
         prior_draw_reference:
