@@ -1,0 +1,27 @@
+created_by: mukesh@mightybot.ai
+description: Schema representing the configuration for a policy agent workflow.
+is_active: true
+is_primary: true
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        classification_rules:
+            type: array
+        convert_unsupported_files:
+            type: boolean
+        is_active:
+            type: boolean
+        policy_name:
+            type: string
+        supported_file_types:
+            type: array
+    required:
+        - is_active
+        - policy_name
+    type: object
+tenant_id: 0aedf8cd-f286-4177-b61c-8ceca47eea47
+title: Policy Agent Configuration
+type: API_REQUEST
+version: "1.0"
+workflow_id: deef31de-6238-4152-80e8-482cc5362909
