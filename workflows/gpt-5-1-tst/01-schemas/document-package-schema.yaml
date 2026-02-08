@@ -1,0 +1,36 @@
+created_by: mukesh@mightybot.ai
+description: null
+is_active: true
+is_primary: true
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        amount_extracted:
+            type: number
+        document_id:
+            type: string
+        document_type:
+            type: string
+        draw_id:
+            type: string
+        expiration_date:
+            type: string
+        extraction_confidence:
+            type: number
+        file_name:
+            type: string
+        is_conditional_waiver:
+            type: boolean
+        status:
+            type: string
+        vendor_name:
+            type: string
+    required:
+        - draw_id
+        - document_id
+        - document_type
+    type: object
+title: Document Package Schema
+type: WEBHOOK
+version: "1.0"
