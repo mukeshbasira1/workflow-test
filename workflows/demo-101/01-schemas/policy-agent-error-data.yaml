@@ -1,0 +1,24 @@
+created_by: mukesh@mightybot.ai
+description: Schema for capturing errors encountered during policy processing.
+is_active: true
+is_primary: false
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        error_code:
+            type: string
+        error_message:
+            type: string
+        timestamp:
+            type: string
+    required:
+        - timestamp
+        - error_code
+        - error_message
+    type: object
+tenant_id: 0aedf8cd-f286-4177-b61c-8ceca47eea47
+title: Policy Agent Error Data
+type: API_REQUEST
+version: "1.0"
+workflow_id: 4d0b7a78-5523-4954-b727-3c384c6d2d12
