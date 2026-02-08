@@ -1,0 +1,85 @@
+api_config: null
+authentication_type: null
+base_url: null
+connection_pool_size: null
+connection_string_encrypted: null
+content_hash: 17babb27275ed96513259f553741a0d62b5038ae6ff9510cf8e2bd967b440bc1
+created_by: mukesh@mightybot.ai
+graphql_config:
+    operation_name: GetDrawDetails
+    operation_type: query
+    query: |-
+        query GetDrawDetails($drawId: ID!) {
+          drawDetails(input: { drawId: $drawId }) {
+            id
+            commitmentId
+            drawName
+            drawNumber
+            drawStatusType
+            drawStatusAliasName
+            drawValidation {
+              warnings {
+                message
+              }
+              errors {
+                message
+              }
+            }
+            requestedAt
+            transferredAt
+            drawAmount
+            drawType
+            fundingSourceAllocations {
+              fundingSourceId
+              fundingSourceName
+              amount {
+                cents
+                code
+              }
+            }
+            inspectionStatus
+            inspectionEstimatedCompletionDate
+            inspectionRecommendedPaymentDue
+            inspectionPercentComplete
+            dealId
+            dealUid
+            dealName
+            dealStatus
+            drawRiskLevel
+            dealMaturityDate
+            approvals {
+              id
+              completedAt
+              completedBy
+              requestedAt
+              approvalLabel
+              approvalType
+              status
+            }
+            stakeholders {
+              id
+              name
+              type
+            }
+            participantGroupId
+          }
+        }
+    variables_schema:
+        drawId:
+            required: true
+            type: ID
+graphql_endpoint_id: f68f0231-8576-4e51-9c80-f01cb2e848c4
+headers: {}
+http_method: null
+is_connected: false
+is_enabled: true
+last_error: null
+last_sync: null
+provider: null
+response_schema_id: null
+scope: query_data
+ssl_enabled: false
+tool_mode: AUDIT
+type: GRAPHQL
+variable_mappings: null
+variables: null
