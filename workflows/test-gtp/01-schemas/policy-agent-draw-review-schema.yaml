@@ -1,0 +1,80 @@
+created_by: mukesh@mightybot.ai
+description: null
+is_active: true
+is_primary: false
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        borrower_id:
+            type: string
+        borrower_strength_assessment:
+            type: string
+        contingency_utilization_percent:
+            type: number
+        credit_officer_id:
+            type: string
+        days_behind_schedule:
+            type: string
+        days_in_review:
+            type: string
+        deal_id:
+            type: string
+        documents_received_count:
+            type: string
+        documents_verified_count:
+            type: string
+        draw_amount_approved:
+            type: number
+        draw_amount_requested:
+            type: number
+        draw_id:
+            type: string
+        draw_number:
+            type: string
+        exception_types:
+            type: array
+        exceptions_flagged:
+            type: boolean
+        hard_cost_variance:
+            type: number
+        inspection_report_received:
+            type: boolean
+        interest_reserve_status:
+            type: string
+        invoice_backup_verified:
+            type: boolean
+        lien_waivers_verified:
+            type: boolean
+        percent_complete_requested:
+            type: number
+        percent_complete_verified:
+            type: number
+        policy_violations:
+            type: array
+        requires_credit_officer_approval:
+            type: boolean
+        review_date:
+            type: string
+        review_notes:
+            type: string
+        review_status:
+            type: string
+        reviewer_id:
+            type: string
+        revision_requests_count:
+            type: string
+        schedule_status:
+            type: string
+        soft_cost_variance:
+            type: number
+    required:
+        - draw_id
+        - deal_id
+        - review_status
+        - review_date
+        - reviewer_id
+    type: object
+title: Policy Agent Draw Review Schema
+type: API_REQUEST
+version: "1.0"
