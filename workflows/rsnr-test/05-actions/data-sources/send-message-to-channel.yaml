@@ -23,7 +23,7 @@ headers:
     Content-Type: application/json
 http_method: POST
 is_connected: false
-is_enabled: true
+is_enabled: false
 key_name: null
 last_error: null
 last_sync: null
