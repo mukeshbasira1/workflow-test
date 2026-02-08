@@ -1,0 +1,38 @@
+created_by: mukesh@mightybot.ai
+description: Schema for documents submitted as part of a draw request, capturing key details for initial processing by the Gatekeeper Agent.
+is_active: true
+is_primary: true
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        associated_draw_id:
+            type: string
+        document_date:
+            type: string
+        document_id:
+            type: string
+        document_type:
+            type: string
+        extracted_amount:
+            type: number
+        file_name:
+            type: string
+        is_duplicate:
+            type: boolean
+        is_signed:
+            type: boolean
+        upload_date:
+            type: string
+        vendor_name:
+            type: string
+    required:
+        - file_name
+        - document_id
+        - upload_date
+        - document_type
+        - associated_draw_id
+    type: object
+title: Draw Submission Document
+type: WEBHOOK
+version: "1.0"
