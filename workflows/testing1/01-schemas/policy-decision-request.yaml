@@ -1,0 +1,36 @@
+created_by: mukesh@mightybot.ai
+description: Represents an incoming request to the policy agent for evaluation (access requests, compliance checks, risk assessments, etc.).
+is_active: true
+is_primary: true
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        attachments:
+            type: array
+        created_at:
+            type: string
+        id:
+            type: string
+        initiator:
+            type: object
+        payload:
+            type: object
+        priority:
+            type: string
+        request_type:
+            type: string
+        resource:
+            type: object
+    required:
+        - id
+        - request_type
+        - initiator
+        - resource
+        - created_at
+    type: object
+tenant_id: 22797ac5-d4a9-4a91-b730-16c2adef9018
+title: Policy Decision Request
+type: API_REQUEST
+version: "1.0"
+workflow_id: 405e2aa7-5478-4897-aa6a-353c08d240eb
