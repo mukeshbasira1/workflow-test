@@ -1,0 +1,9 @@
+accepted_file_types:
+    - .xlsx
+    - .xls
+    - .csv
+    - .pdf
+description: Lender budget or schedule of values used for reconciliation and progress checks.
+entity_schema_id: null
+extraction_model: null
+extraction_schema: null

@@ -10,6 +10,9 @@ enterprise_id: 5e77a6cd-40e6-4cc4-bc6d-c77aaaa2b061
 exit_actions:
     description: Define how the agent responds to policy outcomes
     name: Agent Actions
+file_processing:
+    convert_unsupported: false
+    processor: null
 name: yrr
 required_permissions: []
 tenant_id: 22797ac5-d4a9-4a91-b730-16c2adef9018
