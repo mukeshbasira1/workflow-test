@@ -15,7 +15,7 @@ schema_definition:
         creditscore:
             type: string
         debt_obligation_monthly:
-            type: string
+            type: number
         dob:
             type: string
         interestrate:
