@@ -27,7 +27,6 @@ schema_definition:
         vendor_name:
             type: string
     required:
-        - status
         - draw_id
         - document_id
         - document_type
