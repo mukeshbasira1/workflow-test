@@ -30,6 +30,8 @@ schema_definition:
             type: string
         retainage_percentage:
             type: number
+        risk_score:
+            type: number
         status:
             type: string
         vendor_name:
