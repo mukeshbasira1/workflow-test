@@ -31,6 +31,6 @@ schema_definition:
     type: object
 tenant_id: 22797ac5-d4a9-4a91-b730-16c2adef9018
 title: Policy Decision Request
-type: API_REQUEST
+type: WEBHOOK
 version: "1.0"
 workflow_id: 405e2aa7-5478-4897-aa6a-353c08d240eb
