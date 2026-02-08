@@ -6,8 +6,6 @@ last_modified_by: mukesh@mightybot.ai
 schema_definition:
     additionalProperties: false
     properties:
-        is_active:
-            type: boolean
         policy_id:
             type: string
         policy_name:
