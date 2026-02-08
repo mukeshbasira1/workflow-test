@@ -1,0 +1,45 @@
+api_config:
+    postman_metadata:
+        collection_id: 48ed8d67-fe7d-4394-970b-3c91e9addbf8
+        collection_name: Built Partner API Fork
+        folder_path:
+            - cla-product-api
+            - public
+            - v1
+            - notifications
+        original_name: Get notifications for the current user
+    query_params:
+        - description: Filter by read status
+          disabled: false
+          key: read
+          value: <boolean>
+        - description: Filter by notification channel
+          disabled: false
+          key: channel
+          value: sms
+        - description: Filter by deal UID
+          disabled: false
+          key: deal_uid
+          value: <string>
+        - description: Filter by draw ID
+          disabled: false
+          key: draw_id
+          value: <number>
+authentication_type: BEARER_TOKEN
+base_url: '{{baseUrl}}/cla-product-api/public/v1/notifications'
+connection_pool_size: null
+connection_string_encrypted: null
+created_by: mukesh@mightybot.ai
+headers:
+    Accept: application/json
+http_method: GET
+is_connected: false
+key_name: null
+last_error: null
+last_sync: null
+provider: null
+response_schema_id: null
+secret_encrypted: gAAAAABpHI9QcUTHVPKgBkXIOvrc4gg_24deksU6Djc-2SMFiaNvuO5ySXN27FzL8k8XM7Y4Og8c6LLSmnB4EhAi0mi3r1YD5g==
+ssl_enabled: false
+type: API
+workflow_id: deef31de-6238-4152-80e8-482cc5362909
