@@ -1,0 +1,160 @@
+api_config: null
+authentication_type: null
+base_url: null
+connection_pool_size: null
+connection_string_encrypted: null
+content_hash: 4802d0fb7e5e58f512105bb30a30e5684e5df14f26d6f8e0769d6ce2fe6095c9
+created_by: mukesh@mightybot.ai
+graphql_config:
+    operation_name: GetDrawDetails
+    operation_type: query
+    query: |-
+        query GetDrawDetails($drawId: ID!) {
+          packet(id: $drawId) {
+            id
+            name
+            type
+            commitmentId
+            commitment {
+              id
+              originatorV2 {
+                business {
+                  name
+                }
+              }
+              recipientV2 {
+                business {
+                  name
+                }
+              }
+            }
+            drawName: name
+            drawNumber: appNumber
+            drawStatus
+            drawStatusV2 {
+              id
+              name
+              statusType
+            }
+            drawTypeId
+            drawAmount: paymentTotals {
+              payorPendingPaymentsTotal
+            }
+            requestedAt
+            effectiveDate
+            note
+            status
+            drawValidation {
+              warnings {
+                message
+                tab
+                validationType
+              }
+              errors {
+                message
+                tab
+                validationType
+              }
+            }
+            drawRuleGroups {
+              ... on DrawSubmissionRuleGroup {
+                id
+                status
+                rules {
+                  ... on CustomDrawRule {
+                    id
+                    name
+                    status
+                  }
+                  ... on DocumentDrawRule {
+                    id
+                    name
+                    status
+                    fileTypeId
+                    documentRuleType
+                  }
+                  ... on AutomatedDrawRule {
+                    id
+                    name
+                    status
+                    value
+                  }
+                }
+              }
+              ... on DrawTransitionRuleGroup {
+                id
+                status
+                rules {
+                  ... on CustomDrawRule {
+                    id
+                    name
+                    status
+                  }
+                  ... on DocumentDrawRule {
+                    id
+                    name
+                    status
+                    fileTypeId
+                    documentRuleType
+                  }
+                  ... on AutomatedDrawRule {
+                    id
+                    name
+                    status
+                    value
+                  }
+                }
+              }
+            }
+            drawApprovals(drawId: $drawId) {
+              id
+              requirements {
+                id
+                approverId
+                approverLabel
+                drawApproverType
+                status
+                createdAt
+                completedAt
+                completedBy {
+                  id
+                  email
+                  firstName
+                  lastName
+                }
+              }
+            }
+            capitalStackVersion
+            files {
+              id
+              file {
+                id
+                name
+                url
+                fileTypes {
+                  id
+                  name
+                }
+              }
+            }
+          }
+        }
+    variables_schema:
+        drawId:
+            required: true
+            type: ID
+graphql_endpoint_id: f68f0231-8576-4e51-9c80-f01cb2e848c4
+headers: {}
+http_method: null
+is_connected: false
+is_enabled: true
+last_error: null
+last_sync: null
+provider: null
+response_schema_id: null
+scope: query_data
+ssl_enabled: false
+tool_mode: AUDIT
+type: GRAPHQL
+variable_mappings: null
+variables: null
