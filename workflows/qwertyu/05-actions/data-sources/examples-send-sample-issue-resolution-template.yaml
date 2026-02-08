@@ -1,0 +1,72 @@
+api_config:
+    body:
+        mode: raw
+        raw: |-
+            {
+               "messaging_product": "whatsapp",
+               "to": "{{Recipient-Phone-Number}}",
+               "type": "template",
+               "template": {
+                   "name": "sample_issue_resolution",
+                   "language": {
+                       "code": "en_US",
+                       "policy": "deterministic"
+                   },
+                   "components": [
+                       {
+                           "type": "body",
+                           "parameters": [
+                               {
+                                   "type": "text",
+                                   "text": "*Mr. Jones*"
+                               }
+                           ]
+                       },
+                       {
+                           "type": "button",
+                           "sub_type": "quick_reply",
+                           "index": 0,
+                           "parameters": [
+                               {
+                                   "type": "text",
+                                   "text": "Yes"
+                               }
+                           ]
+                       },
+                       {
+                           "type": "button",
+                           "sub_type": "quick_reply",
+                           "index": 1,
+                           "parameters": [
+                               {
+                                   "type": "text",
+                                   "text": "No"
+                               }
+                           ]
+                       }
+                   ]
+               }
+            }
+    postman_metadata:
+        collection_id: 84d01ff8-4253-4720-b454-af661f36acc2
+        collection_name: WhatsApp Cloud API
+        folder_path:
+            - Examples
+        original_name: Send Sample Issue Resolution Template
+authentication_type: BEARER_TOKEN
+base_url: https://graph.facebook.com
+connection_pool_size: null
+connection_string_encrypted: null
+created_by: mukesh@mightybot.ai
+headers: {}
+http_method: POST
+is_connected: false
+key_name: null
+last_error: null
+last_sync: null
+provider: null
+response_schema_id: null
+secret_encrypted: gAAAAABpFvevHnNJQ_kUCnQ4D6-6VhfQHweJdTXJUgmG75QQ0o8d7Zv1jphdtG0yYSVM3gxsJ0oa4JWXvs5aLdD-ONhzUYCSd_bDzDbdscZ3-6-t5ZKguCs=
+ssl_enabled: false
+type: API
+workflow_id: a271b111-4a4c-46ce-ba63-603f0e48fdea
