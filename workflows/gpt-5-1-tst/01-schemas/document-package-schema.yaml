@@ -26,6 +26,8 @@ schema_definition:
             type: boolean
         prior_draw_reference:
             type: string
+        retainage_percentage:
+            type: number
         status:
             type: string
         vendor_name:
