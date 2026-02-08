@@ -8,6 +8,8 @@ schema_definition:
     properties:
         amex_percentage:
             type: number
+        average_ticket:
+            type: string
         average_ticket_size:
             type: number
         chargeback_count:
