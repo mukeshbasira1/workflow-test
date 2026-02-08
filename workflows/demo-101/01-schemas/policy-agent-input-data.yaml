@@ -12,6 +12,8 @@ schema_definition:
             type: string
         expiration_date:
             type: string
+        interestrate:
+            type: number
         policy_id:
             type: string
         policy_type:
