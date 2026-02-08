@@ -1,0 +1,42 @@
+api_config:
+    body:
+        mode: raw
+        raw: |-
+            {
+              "channel": "{{channel_id}}",
+              "text": "",
+              "unfurl_links": false,
+              "unfurl_media": false
+            }
+    postman_metadata:
+        collection_id: slack-post-message-collection
+        collection_name: Slack Post Message
+        folder_path: []
+        original_name: Send Message to Channel
+authentication_type: BEARER_TOKEN
+base_url: '{{base_url}}/chat.postMessage'
+connection_pool_size: null
+connection_string_encrypted: null
+created_by: mukesh@mightybot.ai
+headers:
+    Authorization: Bearer {{bot_token}}
+    Content-Type: application/json
+http_method: POST
+is_connected: false
+is_enabled: true
+key_name: null
+last_error: null
+last_sync: null
+provider: null
+response_schema_id: null
+secret_encrypted: xoxb-your-bot-token-here
+ssl_enabled: false
+type: API
+variables:
+    base_url:
+        is_secret: false
+        value: https://slack.com/api
+    channel_id:
+        is_secret: false
+        value: C082YG7LS0Z
+workflow_id: 89e6548a-97e9-4242-84fd-50bed82cd342
