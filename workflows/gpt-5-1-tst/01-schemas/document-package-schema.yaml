@@ -12,8 +12,6 @@ schema_definition:
             type: string
         document_id:
             type: string
-        document_type:
-            type: string
         draw_id:
             type: string
         expiration_date:
@@ -33,7 +31,6 @@ schema_definition:
     required:
         - draw_id
         - document_id
-        - document_type
     type: object
 title: Document Package Schema
 type: WEBHOOK
