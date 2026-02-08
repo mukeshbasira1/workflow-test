@@ -13,7 +13,7 @@ schema_definition:
         expiration_date:
             type: string
         interestrate:
-            type: number
+            type: string
         phonenumber:
             type: number
         policy_id:
