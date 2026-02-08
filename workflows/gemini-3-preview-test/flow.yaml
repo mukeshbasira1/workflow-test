@@ -1,0 +1,12 @@
+# Workflow configuration
+agent_type: policy_agent
+branch_name: mightybot/gemini-3-preview-test-260204-64842c73
+config:
+    name: gemini-3-preview-test
+created_by: 3fe42e6d-6d47-43a4-a31e-0340bd542505
+deleted_at: null
+description: ""
+enterprise_id: 5e77a6cd-40e6-4cc4-bc6d-c77aaaa2b061
+name: gemini-3-preview-test
+required_permissions: []
+tenant_id: 22797ac5-d4a9-4a91-b730-16c2adef9018
