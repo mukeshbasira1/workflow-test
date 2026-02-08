@@ -1,0 +1,40 @@
+created_by: mukesh@mightybot.ai
+description: Structured audit record for each evaluated request/decision to support compliance and troubleshooting.
+is_active: true
+is_primary: true
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        action:
+            type: string
+        actor_summary:
+            type: object
+        decision:
+            type: string
+        decision_id:
+            type: string
+        details:
+            type: string
+        evidence:
+            type: array
+        log_id:
+            type: string
+        request_id:
+            type: string
+        resource_summary:
+            type: object
+        timestamp:
+            type: string
+    required:
+        - log_id
+        - request_id
+        - decision_id
+        - timestamp
+        - decision
+    type: object
+tenant_id: 0aedf8cd-f286-4177-b61c-8ceca47eea47
+title: Policy Audit Log Entry
+type: API_REQUEST
+version: "1.0"
+workflow_id: a271b111-4a4c-46ce-ba63-603f0e48fdea
