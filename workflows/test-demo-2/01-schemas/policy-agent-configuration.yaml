@@ -31,8 +31,7 @@ schema_definition:
             type: string
         supported_file_types:
             type: array
-    required:
-        - policy_name
+    required: []
     type: object
 tenant_id: 0aedf8cd-f286-4177-b61c-8ceca47eea47
 title: Policy Agent Configuration
