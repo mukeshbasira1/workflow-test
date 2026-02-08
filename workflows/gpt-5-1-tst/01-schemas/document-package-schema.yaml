@@ -46,6 +46,8 @@ schema_definition:
             type: string
         vendor_name:
             type: string
+        workflow_status:
+            type: string
     required:
         - draw_id
         - document_id
