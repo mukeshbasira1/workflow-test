@@ -24,6 +24,8 @@ schema_definition:
             type: string
         is_conditional_waiver:
             type: boolean
+        prior_draw_reference:
+            type: string
         status:
             type: string
         vendor_name:
