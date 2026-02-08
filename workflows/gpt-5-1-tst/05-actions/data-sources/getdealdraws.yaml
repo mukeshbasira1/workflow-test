@@ -1,0 +1,123 @@
+api_config: null
+authentication_type: null
+base_url: null
+connection_pool_size: null
+connection_string_encrypted: null
+content_hash: b38278c5e6ae424626d57d5cd416ca58acdf0ee5ff84a49dc4b995e5024d32c2
+created_by: mukesh@mightybot.ai
+graphql_config:
+    operation_name: GetDealDraws
+    operation_type: query
+    query: |-
+        query GetDealDraws($drawId: DrawIdPayorPayee!) {
+          dealDraw(input: { drawId: $drawId }) {
+            id
+            purchaseOrderLineItems {
+              budgetLineItemId
+              recommendedAmount
+            }
+            uses {
+              budgetLineItemId
+              budgetLineItemName
+              groupName
+              costType {
+                id
+                name
+              }
+              originalAmount
+              adjustedToDate
+              currentAdjustment
+              revisedAmount
+              fundedToDate
+              currentDrawRequest
+              remainingToFund
+            }
+            sources {
+              sourceId
+              sourceName
+              parentSourceId
+              sourceType {
+                id
+                name
+              }
+              nodeType
+              isExcluded
+              originalAmount
+              adjustedToDate
+              currentAdjustment
+              revisedAmount
+              fundedToDate
+              currentDrawRequest
+              remainingToFund
+            }
+            history {
+              drawId
+              drawName
+              drawNumber
+              fundedAt
+              uses {
+                budgetLineItemId
+                currentAdjustment
+                currentDrawRequest
+              }
+              sources {
+                fundingSourceId
+                currentAdjustment
+                currentDrawRequest
+              }
+            }
+            documents {
+              files {
+                id
+                name
+              }
+              folders {
+                id
+                name
+              }
+            }
+            status {
+              id
+              name
+              statusType
+              isTransitioning
+              transitionMessage
+            }
+            fundingNoticeConfiguration {
+              fundsDestination
+              obfuscate
+              documents
+              branding
+              expirationLength
+              emailsToNotify
+            }
+            fundingNotices {
+              sourceId
+              lastNotifiedAt
+              fundingStatus
+            }
+            defaultRetainageRates {
+              work
+              materials
+            }
+          }
+        }
+    variables_schema:
+        drawId:
+            required: true
+            type: DrawIdPayorPayee
+graphql_endpoint_id: f68f0231-8576-4e51-9c80-f01cb2e848c4
+headers: {}
+http_method: null
+is_connected: false
+is_enabled: true
+last_error: null
+last_sync: null
+provider: null
+response_schema_id: null
+scope: query_data
+ssl_enabled: false
+tool_mode: AUDIT
+type: GRAPHQL
+variable_mappings: null
+variables: null
