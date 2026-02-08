@@ -24,6 +24,8 @@ schema_definition:
             type: string
         statement_period_start:
             type: string
+        total_monthly_sales:
+            type: string
         total_sales:
             type: number
         transaction_count:
@@ -31,11 +33,11 @@ schema_definition:
         visa_percentage:
             type: number
     required:
-        - merchant_name
-        - statement_period_start
-        - statement_period_end
         - total_sales
+        - merchant_name
         - transaction_count
+        - statement_period_end
+        - statement_period_start
     type: object
 tenant_id: 22797ac5-d4a9-4a91-b730-16c2adef9018
 title: MCA Processor Statement Extraction
