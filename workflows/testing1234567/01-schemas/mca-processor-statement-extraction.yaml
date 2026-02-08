@@ -14,6 +14,8 @@ schema_definition:
             type: number
         average_ticket_size:
             type: number
+        card_brand_mix:
+            type: string
         chargeback_count:
             type: string
         discover_percentage:
