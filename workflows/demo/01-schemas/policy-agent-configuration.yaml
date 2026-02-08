@@ -27,7 +27,8 @@ schema_definition:
             type: string
         ssn/orpan:
             type: string
-    required: []
+    required:
+        - applicantname
     type: object
 tenant_id: 0aedf8cd-f286-4177-b61c-8ceca47eea47
 title: Policy Agent Configuration
