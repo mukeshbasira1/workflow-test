@@ -12,8 +12,6 @@ schema_definition:
             type: string
         id:
             type: string
-        initiator:
-            type: object
         payload:
             type: object
         priority:
@@ -27,7 +25,6 @@ schema_definition:
     required:
         - id
         - resource
-        - initiator
         - created_at
         - request_type
     type: object
