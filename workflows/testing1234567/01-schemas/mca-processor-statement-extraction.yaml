@@ -39,6 +39,6 @@ schema_definition:
     type: object
 tenant_id: 22797ac5-d4a9-4a91-b730-16c2adef9018
 title: MCA Processor Statement Extraction
-type: API_REQUEST
+type: WEBHOOK
 version: "1.0"
 workflow_id: f4e1c470-43c7-4d1a-a814-e1fda6f07772
