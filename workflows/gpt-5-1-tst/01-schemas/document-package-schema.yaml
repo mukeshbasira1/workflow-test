@@ -51,5 +51,5 @@ schema_definition:
         - document_id
     type: object
 title: Document Package Schema
-type: FILE_EXTRACTION
+type: API_REQUEST
 version: "1.0"
