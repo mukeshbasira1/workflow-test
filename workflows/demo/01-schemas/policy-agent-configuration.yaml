@@ -13,7 +13,7 @@ schema_definition:
         applicantname:
             type: string
         convert_unsupported_files:
-            type: boolean
+            type: string
         creditscore:
             type: number
         dob:
