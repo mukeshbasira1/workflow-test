@@ -1,0 +1,30 @@
+created_by: mukesh@mightybot.ai
+description: Schema for the input data to be processed by the policy agent workflow.
+is_active: true
+is_primary: true
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        effective_date:
+            type: string
+        expiration_date:
+            type: string
+        policy_id:
+            type: string
+        policy_type:
+            type: string
+        premium_amount:
+            type: number
+    required:
+        - policy_id
+        - policy_type
+        - effective_date
+        - expiration_date
+        - premium_amount
+    type: object
+tenant_id: 0aedf8cd-f286-4177-b61c-8ceca47eea47
+title: Policy Agent Input Data
+type: API_REQUEST
+version: "1.0"
+workflow_id: 4d0b7a78-5523-4954-b727-3c384c6d2d12
