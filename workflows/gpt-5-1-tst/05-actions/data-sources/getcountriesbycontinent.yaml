@@ -48,5 +48,5 @@ variable_mappings:
         - source_type: webhook_field
           static_value: null
           variable_name: filter
-          webhook_field_path: risk_score
+          webhook_field_path: vendor_name
 variables: null
