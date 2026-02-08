@@ -119,5 +119,9 @@ scope: query_data
 ssl_enabled: false
 tool_mode: AUDIT
 type: GRAPHQL
-variable_mappings: null
+variable_mappings:
+    mappings:
+        - source_type: webhook_field
+          variable_name: drawId
+          webhook_field_path: draw_id
 variables: null
