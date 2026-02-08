@@ -1,0 +1,9 @@
+accepted_file_types:
+    - .xlsx
+    - .xls
+    - .csv
+    - .pdf
+description: Invoice detail spreadsheet mapping vendor, amount, and budget line for the draw period.
+entity_schema_id: null
+extraction_model: null
+extraction_schema: null
