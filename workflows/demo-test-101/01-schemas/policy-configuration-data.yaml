@@ -15,6 +15,8 @@ schema_definition:
             type: string
         policy_type:
             type: string
+        ssn/orpan:
+            type: string
     required:
         - policy_name
         - policy_type
