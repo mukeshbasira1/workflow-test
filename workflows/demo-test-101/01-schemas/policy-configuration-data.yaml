@@ -15,7 +15,6 @@ schema_definition:
         creditscore:
             type: string
         dob:
-            format: date
             type: string
         interestrate:
             type: string
