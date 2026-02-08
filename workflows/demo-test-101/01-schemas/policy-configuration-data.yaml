@@ -14,7 +14,7 @@ schema_definition:
             type: string
         creditscore:
             type: string
-        deb:
+        debt_obligation_monthly:
             type: string
         dob:
             type: string
