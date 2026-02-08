@@ -1,0 +1,55 @@
+created_by: mukesh@mightybot.ai
+description: null
+is_active: true
+is_primary: false
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        amount_extracted:
+            type: number
+        budget_line_item_id:
+            type: string
+        critical_issues_count:
+            type: string
+        document_id:
+            type: string
+        draw_id:
+            type: string
+        escalation_flag:
+            type: boolean
+        expiration_date:
+            type: string
+        extraction_confidence:
+            type: number
+        file_name:
+            type: string
+        gps_verified_photos:
+            type: string
+        inspection_percent_complete:
+            type: number
+        inspection_photo_count:
+            type: string
+        is_conditional_waiver:
+            type: boolean
+        line_item_photo_matches:
+            type: string
+        prior_draw_reference:
+            type: string
+        retainage_percentage:
+            type: number
+        revised_budget_date:
+            type: string
+        risk_score:
+            type: number
+        status:
+            type: string
+        vendor_name:
+            type: string
+    required:
+        - draw_id
+        - document_id
+    type: object
+title: Enhanced Document Package Schema for Draw Review
+type: API_REQUEST
+version: "1.0"
