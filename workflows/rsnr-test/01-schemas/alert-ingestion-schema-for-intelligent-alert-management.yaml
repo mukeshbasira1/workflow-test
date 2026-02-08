@@ -31,7 +31,6 @@ schema_definition:
         timestamp:
             type: string
     required:
-        - alert_id
         - timestamp
         - alert_type
         - service_name
