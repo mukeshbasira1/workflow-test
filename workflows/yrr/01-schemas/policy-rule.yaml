@@ -28,6 +28,8 @@ schema_definition:
             type: string
         message_template:
             type: string
+        mu:
+            type: string
         owner_team:
             type: string
         policy_id:
