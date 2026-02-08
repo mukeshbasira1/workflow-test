@@ -115,6 +115,6 @@ type: GRAPHQL
 variable_mappings:
     mappings:
         - source_type: webhook_field
-          variable_name: drawId
+          variable_name: dealId
           webhook_field_path: draw_id
 variables: null
