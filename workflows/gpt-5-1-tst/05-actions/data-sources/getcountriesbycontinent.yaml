@@ -46,7 +46,6 @@ type: GRAPHQL
 variable_mappings:
     mappings:
         - source_type: webhook_field
-          static_value: null
           variable_name: filter
-          webhook_field_path: escalation_flag
+          webhook_field_path: critical_issues_count
 variables: null
