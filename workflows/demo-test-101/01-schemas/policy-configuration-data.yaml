@@ -22,6 +22,6 @@ schema_definition:
     type: object
 tenant_id: 0aedf8cd-f286-4177-b61c-8ceca47eea47
 title: Policy Configuration Data
-type: API_REQUEST
+type: WEBHOOK
 version: "1.0"
 workflow_id: 56b0ae10-0ff5-41d4-a46a-a7c4924c2073
