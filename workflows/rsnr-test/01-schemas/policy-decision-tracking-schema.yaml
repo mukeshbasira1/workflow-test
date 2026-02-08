@@ -1,0 +1,38 @@
+created_by: mukesh@mightybot.ai
+description: Flat schema to track AI policy engine decisions for alert routing, escalation, and suppression decisions.
+is_active: true
+is_primary: false
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        alert_id:
+            type: string
+        confidence_score:
+            type: number
+        decision_timestamp:
+            type: string
+        escalation_path:
+            type: array
+        model_used:
+            type: string
+        policy_version:
+            type: string
+        primary_action:
+            type: string
+        routing_justification:
+            type: string
+        routing_target:
+            type: string
+        suppression_reason:
+            type: string
+    required:
+        - alert_id
+        - primary_action
+        - confidence_score
+        - decision_timestamp
+    type: object
+title: Policy Decision Tracking Schema
+type: API_REQUEST
+version: "1.0"
+workflow_id: 1f317657-8702-4e85-81ab-a13f24ca3c99
