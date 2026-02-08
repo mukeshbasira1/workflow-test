@@ -12,8 +12,6 @@ schema_definition:
             type: boolean
         supported_file_types:
             type: array
-        version:
-            type: string
         workflow_name:
             type: string
     required:
