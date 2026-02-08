@@ -1,0 +1,42 @@
+created_by: mukesh@mightybot.ai
+description: Configuration schema for policy definitions, rules, and limits consumed by the policy agent. Captures policy metadata, rule definitions, conditions, and parameters used during automated evaluations.
+is_active: true
+is_primary: true
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        created_at:
+            type: string
+        description:
+            type: string
+        effective_date:
+            type: string
+        expiry_date:
+            type: string
+        metadata:
+            type: object
+        name:
+            type: string
+        owner:
+            type: string
+        policy_id:
+            type: string
+        rules:
+            type: array
+        updated_at:
+            type: string
+        version:
+            type: string
+    required:
+        - name
+        - rules
+        - version
+        - policy_id
+        - effective_date
+    type: object
+tenant_id: 0aedf8cd-f286-4177-b61c-8ceca47eea47
+title: Policy Agent Configuration
+type: API_REQUEST
+version: "1.0"
+workflow_id: deef31de-6238-4152-80e8-482cc5362909
