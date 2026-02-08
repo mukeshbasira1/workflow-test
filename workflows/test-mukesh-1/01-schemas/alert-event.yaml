@@ -1,0 +1,42 @@
+created_by: mukesh@mightybot.ai
+description: null
+is_active: true
+is_primary: true
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        acknowledged:
+            type: boolean
+        alert_id:
+            type: string
+        alert_message:
+            type: string
+        alert_severity:
+            type: string
+        alert_source:
+            type: string
+        alert_type:
+            type: string
+        commit_author:
+            type: string
+        commit_hash:
+            type: string
+        service_name:
+            type: string
+        slack_channel:
+            type: string
+        timestamp:
+            type: string
+    required:
+        - alert_id
+        - timestamp
+        - alert_type
+        - alert_source
+        - service_name
+        - alert_message
+        - alert_severity
+    type: object
+title: Alert Event
+type: WEBHOOK
+version: "1.0"
