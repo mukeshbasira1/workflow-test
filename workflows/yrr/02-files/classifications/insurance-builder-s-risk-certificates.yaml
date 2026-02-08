@@ -1,0 +1,9 @@
+accepted_file_types:
+    - .pdf
+    - .jpg
+    - .jpeg
+    - .png
+description: Builder’s risk and insurance certificates used for active coverage checks.
+entity_schema_id: null
+extraction_model: null
+extraction_schema: null
