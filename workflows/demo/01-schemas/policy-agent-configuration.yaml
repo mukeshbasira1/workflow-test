@@ -15,7 +15,7 @@ schema_definition:
         convert_unsupported_files:
             type: boolean
         creditscore:
-            type: integer
+            type: number
         dob:
             format: date
             type: string
