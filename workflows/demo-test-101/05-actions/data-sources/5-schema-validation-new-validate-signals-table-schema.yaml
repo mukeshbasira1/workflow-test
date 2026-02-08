@@ -1,0 +1,45 @@
+api_config:
+    body:
+        mode: raw
+        raw: |-
+            {
+              "table_type": "signals"
+            }
+    postman_metadata:
+        collection_id: compliance-logging-apis
+        collection_name: Compliance Logging APIs
+        folder_path:
+            - 5. Schema Validation (NEW)
+        original_name: Validate Signals Table Schema
+    variables:
+        - key: base_url
+          type: string
+          value: http://localhost:8000
+        - key: workflow_id
+          type: string
+          value: your-workflow-uuid-here
+        - key: schema_id
+          type: string
+          value: your-schema-uuid-here
+        - key: destination_id
+          type: string
+          value: your-destination-uuid-here
+authentication_type: NONE
+base_url: https://{{base_url}}
+connection_pool_size: null
+connection_string_encrypted: null
+created_by: mukesh@mightybot.ai
+headers:
+    Authorization: Bearer {{token}}
+    Content-Type: application/json
+http_method: POST
+is_connected: false
+key_name: null
+last_error: null
+last_sync: null
+provider: null
+response_schema_id: null
+secret_encrypted: null
+ssl_enabled: false
+type: API
+workflow_id: 56b0ae10-0ff5-41d4-a46a-a7c4924c2073
