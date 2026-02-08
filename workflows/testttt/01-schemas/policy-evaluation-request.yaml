@@ -27,10 +27,10 @@ schema_definition:
         timeout_ms:
             type: string
     required:
-        - request_id
-        - resource
-        - subject
         - action
+        - subject
+        - resource
+        - request_id
     type: object
 tenant_id: 22797ac5-d4a9-4a91-b730-16c2adef9018
 title: Policy Evaluation Request
