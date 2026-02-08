@@ -12,10 +12,16 @@ schema_definition:
             type: string
         convert_unsupported_files:
             type: boolean
+        creditscore:
+            type: integer
         dob:
             format: date
             type: string
+        interestrate:
+            type: number
         loantype:
+            type: string
+        phonenumber:
             type: string
         ssn/orpan:
             type: string
