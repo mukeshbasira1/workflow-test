@@ -1,0 +1,43 @@
+created_by: mukesh@mightybot.ai
+description: Flat schema for ingesting raw alerts from monitoring systems like Sentry, Prometheus, Grafana with all necessary context for processing.
+is_active: true
+is_primary: true
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        affected_hosts:
+            type: array
+        alert_id:
+            type: string
+        alert_type:
+            type: string
+        error_message:
+            type: string
+        metric_value:
+            type: number
+        raw_payload:
+            type: string
+        service_name:
+            type: string
+        severity:
+            type: string
+        source_system:
+            type: string
+        stack_trace:
+            type: string
+        threshold_value:
+            type: number
+        timestamp:
+            type: string
+    required:
+        - alert_id
+        - timestamp
+        - alert_type
+        - service_name
+        - source_system
+    type: object
+title: Alert Ingestion Schema for Intelligent Alert Management
+type: WEBHOOK
+version: "1.0"
+workflow_id: 1f317657-8702-4e85-81ab-a13f24ca3c99
