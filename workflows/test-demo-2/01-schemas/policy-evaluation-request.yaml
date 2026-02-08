@@ -1,0 +1,43 @@
+created_by: mukesh@mightybot.ai
+description: Schema for request payloads submitted to the policy agent for evaluation. Captures application context, input data, and associated documents for reproducible evaluations.
+is_active: true
+is_primary: false
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        application_id:
+            type: string
+        context:
+            type: object
+        correlation_id:
+            type: string
+        documents:
+            type: array
+        evaluation_mode:
+            type: string
+        evaluation_timestamp:
+            type: string
+        payload:
+            type: object
+        policy_id:
+            type: string
+        policy_version:
+            type: string
+        request_id:
+            type: string
+        requester_id:
+            type: string
+    required:
+        - request_id
+        - policy_id
+        - application_id
+        - requester_id
+        - evaluation_timestamp
+        - payload
+    type: object
+tenant_id: 0aedf8cd-f286-4177-b61c-8ceca47eea47
+title: Policy Evaluation Request
+type: API_REQUEST
+version: "1.0"
+workflow_id: deef31de-6238-4152-80e8-482cc5362909
