@@ -21,8 +21,6 @@ schema_definition:
         dob:
             format: date
             type: string
-        is_active:
-            type: boolean
         loantype:
             type: string
         phonenumber:
