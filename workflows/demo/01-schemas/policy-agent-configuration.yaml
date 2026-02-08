@@ -8,8 +8,6 @@ schema_definition:
     properties:
         convert_unsupported_files:
             type: boolean
-        supported_file_types:
-            type: array
     required: []
     type: object
 tenant_id: 0aedf8cd-f286-4177-b61c-8ceca47eea47
