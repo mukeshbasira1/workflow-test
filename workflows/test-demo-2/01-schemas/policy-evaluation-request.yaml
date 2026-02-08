@@ -8,7 +8,7 @@ schema_definition:
     properties:
         Salary:
             type: string
-        ag:
+        age:
             type: string
         application_id:
             type: string
@@ -31,7 +31,7 @@ schema_definition:
     required:
         - payload
         - Salary
-        - ag
+        - age
         - requester_id
         - application_id
         - evaluation_timestamp
