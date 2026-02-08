@@ -1,0 +1,39 @@
+api_config: null
+authentication_type: null
+base_url: null
+connection_pool_size: null
+connection_string_encrypted: null
+content_hash: 62bd156b25844e81c0fa6972f624335b7aefef032a06e9a8d930aa415ffc5b40
+created_by: mukesh@mightybot.ai
+graphql_config:
+    operation_name: GetCountriesWithBasicDetails
+    operation_type: query
+    query: |-
+        query GetCountriesWithBasicDetails {
+          countries {
+            code
+            name
+            continent {
+              code
+              name
+            }
+            capital
+            currency
+            emoji
+          }
+        }
+    variables_schema: {}
+graphql_endpoint_id: 0d344efe-7f4c-474c-8c9c-86f2a61d9bc8
+headers: {}
+http_method: null
+is_connected: false
+is_enabled: true
+last_error: null
+last_sync: null
+provider: null
+response_schema_id: null
+ssl_enabled: false
+tool_mode: AUDIT
+type: GRAPHQL
+variable_mappings: null
+variables: null
