@@ -26,8 +26,6 @@ schema_definition:
             type: boolean
         prior_draw_reference:
             type: string
-        risk_score:
-            type: number
         status:
             type: string
         vendor_name:
