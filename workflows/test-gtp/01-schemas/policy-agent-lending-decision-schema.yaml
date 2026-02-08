@@ -1,0 +1,147 @@
+created_by: mukesh@mightybot.ai
+description: null
+is_active: true
+is_primary: true
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        affordability_multiplier:
+            type: number
+        age_at_end_of_term:
+            type: string
+        applicant_age:
+            type: string
+        application_id:
+            type: string
+        assessment_date:
+            type: string
+        bankruptcy_discharge_years:
+            type: string
+        bankruptcy_discharged:
+            type: boolean
+        capital_raising_allowed:
+            type: boolean
+        ccj_count_3_years:
+            type: string
+        construction_type:
+            type: string
+        construction_types_accepted:
+            type: array
+        credit_score_acceptable:
+            type: boolean
+        decision_notes:
+            type: string
+        decision_status:
+            type: string
+        decline_reason:
+            type: string
+        employment_months:
+            type: string
+        employment_status:
+            type: string
+        epc_rating:
+            type: string
+        gifted_deposit_allowed:
+            type: boolean
+        guarantor_allowed:
+            type: boolean
+        household_income:
+            type: number
+        interest_coverage_ratio:
+            type: number
+        interest_only_allowed:
+            type: boolean
+        iva_discharge_years:
+            type: string
+        iva_discharged:
+            type: boolean
+        lease_years_remaining:
+            type: string
+        loan_amount:
+            type: number
+        ltv_percentage:
+            type: number
+        max_affordable_loan:
+            type: number
+        max_age_allowed:
+            type: string
+        max_ccj_allowed:
+            type: string
+        max_gifted_deposit_percentage:
+            type: number
+        max_interest_only_ltv:
+            type: number
+        max_ltv_allowed:
+            type: number
+        max_portfolio_size:
+            type: string
+        max_properties_with_society:
+            type: string
+        max_term_years:
+            type: string
+        min_bankruptcy_discharge_years:
+            type: string
+        min_employment_months:
+            type: string
+        min_epc_rating:
+            type: string
+        min_icr_required:
+            type: number
+        min_iva_discharge_years:
+            type: string
+        min_lease_years:
+            type: string
+        min_personal_contribution_percentage:
+            type: number
+        min_repossession_years:
+            type: string
+        min_term_years:
+            type: string
+        min_uk_residency_years:
+            type: string
+        mortgage_term_years:
+            type: string
+        new_build:
+            type: boolean
+        policy_effective_date:
+            type: string
+        policy_end_date:
+            type: string
+        policy_name:
+            type: string
+        policy_notes:
+            type: string
+        policy_type:
+            type: string
+        property_type:
+            type: string
+        property_types_accepted:
+            type: array
+        property_valuation:
+            type: number
+        referred_reason:
+            type: string
+        rental_income_monthly:
+            type: number
+        repossession_history:
+            type: boolean
+        repossession_years:
+            type: string
+        stress_rate_percentage:
+            type: number
+        uk_residency_required:
+            type: boolean
+        uk_residency_years:
+            type: string
+    required:
+        - policy_name
+        - application_id
+        - ltv_percentage
+        - assessment_date
+        - decision_status
+        - affordability_multiplier
+    type: object
+title: Policy Agent Lending Decision Schema
+type: API_REQUEST
+version: "1.0"
