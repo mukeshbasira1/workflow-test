@@ -15,7 +15,7 @@ schema_definition:
         interestrate:
             type: number
         phonenumber:
-            type: string
+            type: number
         policy_id:
             type: string
         policy_type:
