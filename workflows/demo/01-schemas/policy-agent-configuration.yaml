@@ -6,12 +6,18 @@ last_modified_by: mukesh@mightybot.ai
 schema_definition:
     additionalProperties: false
     properties:
+        annualincome:
+            type: number
         applicantname:
             type: string
         convert_unsupported_files:
             type: boolean
         dob:
             format: date
+            type: string
+        loantype:
+            type: string
+        ssn/orpan:
             type: string
     required: []
     type: object
