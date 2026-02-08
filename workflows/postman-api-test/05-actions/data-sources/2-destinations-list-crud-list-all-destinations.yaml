@@ -1,0 +1,38 @@
+api_config:
+    postman_metadata:
+        collection_id: compliance-logging-apis
+        collection_name: Compliance Logging APIs
+        folder_path:
+            - 2. Destinations - List & CRUD
+        original_name: List All Destinations
+    variables:
+        - key: base_url
+          type: string
+          value: http://localhost:8000
+        - key: workflow_id
+          type: string
+          value: your-workflow-uuid-here
+        - key: schema_id
+          type: string
+          value: your-schema-uuid-here
+        - key: destination_id
+          type: string
+          value: your-destination-uuid-here
+authentication_type: NONE
+base_url: '{{base_url}}/api/workflows/{{workflow_id}}/compliance/destinations'
+connection_pool_size: null
+connection_string_encrypted: null
+created_by: mukesh@mightybot.ai
+headers:
+    Authorization: Bearer {{token}}
+http_method: GET
+is_connected: false
+key_name: null
+last_error: null
+last_sync: null
+provider: null
+response_schema_id: null
+secret_encrypted: null
+ssl_enabled: false
+type: API
+workflow_id: 9da5eae5-9d46-457e-b35d-b98fc01fe10b
