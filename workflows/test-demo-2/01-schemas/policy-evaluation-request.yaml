@@ -22,17 +22,17 @@ schema_definition:
             type: string
         evaluation_timestamp:
             type: string
+        name:
+            type: string
         payload:
             type: object
         policy_version:
             type: string
-        requester_id:
-            type: string
     required:
-        - payload
-        - Salary
         - age
-        - requester_id
+        - Salary
+        - payload
+        - name
         - application_id
         - evaluation_timestamp
     type: object
