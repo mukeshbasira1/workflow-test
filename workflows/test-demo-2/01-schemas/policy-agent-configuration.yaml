@@ -12,8 +12,6 @@ schema_definition:
             type: number
         applicantname:
             type: string
-        classification_rules:
-            type: array
         convert_unsupported_files:
             type: boolean
         creditscore:
@@ -24,8 +22,6 @@ schema_definition:
         loantype:
             type: string
         phonenumber:
-            type: string
-        policy_name:
             type: string
         supported_file_types:
             type: array
