@@ -17,6 +17,8 @@ schema_definition:
             type: string
         is_active:
             type: boolean
+        phonenumber:
+            type: string
         policy_name:
             type: string
         supported_file_types:
