@@ -10,6 +10,9 @@ schema_definition:
             type: string
         convert_unsupported_files:
             type: boolean
+        dob:
+            format: date
+            type: string
     required: []
     type: object
 tenant_id: 0aedf8cd-f286-4177-b61c-8ceca47eea47
