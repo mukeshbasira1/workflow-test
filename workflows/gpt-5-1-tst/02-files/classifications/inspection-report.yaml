@@ -1,0 +1,6 @@
+accepted_file_types:
+    - .pdf
+description: Construction inspection reports with photos
+entity_schema_id: null
+extraction_model: null
+extraction_schema: null
