@@ -1,0 +1,37 @@
+created_by: mukesh@mightybot.ai
+description: Flat schema for logging policy decisions and enforcement actions in alert management.
+is_active: true
+is_primary: true
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        alert_id:
+            type: string
+        confidence_score:
+            type: number
+        decision:
+            type: string
+        decision_id:
+            type: string
+        decision_timestamp:
+            type: string
+        enforcement_action:
+            type: string
+        policy_name:
+            type: string
+        reasoning:
+            type: string
+        reviewer_id:
+            type: string
+    required:
+        - alert_id
+        - decision
+        - decision_id
+        - policy_name
+        - decision_timestamp
+    type: object
+title: Policy Decision Log Schema
+type: WEBHOOK
+version: "1.0"
+workflow_id: 89e6548a-97e9-4242-84fd-50bed82cd342
