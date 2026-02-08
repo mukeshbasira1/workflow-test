@@ -20,6 +20,8 @@ schema_definition:
             type: string
         request_type:
             type: string
+        request_type1:
+            type: string
         resource:
             type: object
     required:
