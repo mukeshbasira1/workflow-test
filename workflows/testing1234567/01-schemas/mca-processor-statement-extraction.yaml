@@ -23,7 +23,7 @@ schema_definition:
         statement_period_end:
             type: string
         statement_period_start:
-            type: string
+            type: number
         total_monthly_sales:
             type: string
         total_sales:
