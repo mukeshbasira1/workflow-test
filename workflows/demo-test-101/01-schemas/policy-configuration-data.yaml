@@ -17,7 +17,6 @@ schema_definition:
     required:
         - policy_id
         - policy_name
-        - is_active
         - policy_type
     type: object
 tenant_id: 0aedf8cd-f286-4177-b61c-8ceca47eea47
