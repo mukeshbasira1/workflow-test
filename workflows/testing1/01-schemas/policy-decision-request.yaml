@@ -24,10 +24,10 @@ schema_definition:
             type: object
     required:
         - id
-        - request_type
-        - initiator
         - resource
+        - initiator
         - created_at
+        - request_type
     type: object
 tenant_id: 22797ac5-d4a9-4a91-b730-16c2adef9018
 title: Policy Decision Request2222
