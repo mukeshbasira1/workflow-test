@@ -123,5 +123,5 @@ variable_mappings:
     mappings:
         - source_type: webhook_field
           variable_name: drawId
-          webhook_field_path: draw_id
+          webhook_field_path: created_at
 variables: null
