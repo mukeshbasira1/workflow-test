@@ -1,0 +1,225 @@
+name: MightyBot Workflow Validation
+
+# Git Flow 4: Validate feature branch workflow changes
+# When this workflow completes successfully, GitHub sends a workflow_run
+# webhook to MightyBot, which triggers the Git -> DB sync.
+#
+# Validation rules:
+# - No file renames (files can be added, modified, or deleted)
+# - No workflow folder renames
+# - No workflow folder deletions (entire workflow can't be removed)
+
+on:
+  push:
+    branches-ignore:
+      - main
+      - master
+      - develop
+      - 'mightybot/**'  # Bot-managed branches (DB -> Git sync)
+      - 'rollback/**'
+    paths:
+      - 'workflows/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Need full history to compare with main
+
+      - name: Validate YAML syntax
+        id: yaml-syntax
+        run: |
+          echo "🔍 Validating YAML syntax..."
+
+          ERRORS=""
+          YAML_FILES=$(find workflows -name "*.yaml" -o -name "*.yml" 2>/dev/null || true)
+
+          if [ -z "$YAML_FILES" ]; then
+            echo "⚠️ No YAML files found in workflows/"
+            exit 0
+          fi
+
+          # Install yq for YAML validation (lightweight, fast)
+          if ! command -v yq &> /dev/null; then
+            echo "Installing yq..."
+            sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+            sudo chmod +x /usr/local/bin/yq
+          fi
+
+          echo ""
+          for file in $YAML_FILES; do
+            # Check if file is valid YAML
+            if ! yq eval '.' "$file" > /dev/null 2>&1; then
+              ERROR_MSG=$(yq eval '.' "$file" 2>&1 || true)
+              echo "::error file=$file::❌ Invalid YAML syntax"
+              echo "  Error: $ERROR_MSG"
+              ERRORS="$ERRORS\n- $file: Invalid YAML syntax"
+            else
+              echo "✅ $file"
+            fi
+          done
+
+          if [ -n "$ERRORS" ]; then
+            echo ""
+            echo "=============================================="
+            echo "❌ YAML Syntax Validation FAILED"
+            echo "=============================================="
+            echo -e "Errors:$ERRORS"
+            echo ""
+            echo "Please fix the YAML syntax errors before pushing."
+            exit 1
+          fi
+
+          echo ""
+          echo "✅ All YAML files have valid syntax"
+
+      - name: Validate workflow changes
+        id: validate
+        run: |
+          echo "🔍 Validating workflow changes..."
+
+          # Get the default branch (main, master, or develop)
+          DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
+          echo "Default branch: $DEFAULT_BRANCH"
+
+          ERRORS=""
+
+          # ===========================================
+          # Check 1: No file renames allowed
+          # ===========================================
+          echo ""
+          echo "📋 Checking for file renames..."
+
+          # git diff --name-status shows: R100 old_path new_path for renames
+          RENAMED_FILES=$(git diff --name-status \
+            origin/${DEFAULT_BRANCH}...HEAD -- 'workflows/' | grep '^R' || true)
+
+          if [ -n "$RENAMED_FILES" ]; then
+            echo "::error::❌ File renames are not allowed!"
+            echo "$RENAMED_FILES" | while read line; do
+              OLD_FILE=$(echo "$line" | awk '{print $2}')
+              NEW_FILE=$(echo "$line" | awk '{print $3}')
+              echo "::error::  Renamed: $OLD_FILE → $NEW_FILE"
+            done
+            ERRORS="$ERRORS\n- File renames detected"
+          else
+            echo "✅ No file renames detected"
+          fi
+
+          # ===========================================
+          # Check 2: No workflow folder renames
+          # ===========================================
+          echo ""
+          echo "📋 Checking for workflow folder renames..."
+
+          # Get workflow folders in base branch
+          git fetch origin ${DEFAULT_BRANCH} --depth=1 2>/dev/null || true
+          BASE_WORKFLOWS=$(git ls-tree -d --name-only \
+            origin/${DEFAULT_BRANCH} workflows/ 2>/dev/null \
+            | cut -d'/' -f2 | sort -u || true)
+
+          # Get workflow folders in current branch
+          CURRENT_WORKFLOWS=$(ls -d workflows/*/ 2>/dev/null | cut -d'/' -f2 | sort -u || true)
+
+          # Find workflows that existed in base but not in current (potential renames or deletes)
+          MISSING_WORKFLOWS=""
+          for wf in $BASE_WORKFLOWS; do
+            if [ -n "$wf" ] && ! echo "$CURRENT_WORKFLOWS" | grep -q "^${wf}$"; then
+              MISSING_WORKFLOWS="$MISSING_WORKFLOWS $wf"
+            fi
+          done
+
+          # Find workflows that exist in current but not in base (new or renamed-to)
+          NEW_WORKFLOWS=""
+          for wf in $CURRENT_WORKFLOWS; do
+            if [ -n "$wf" ] && ! echo "$BASE_WORKFLOWS" | grep -q "^${wf}$"; then
+              NEW_WORKFLOWS="$NEW_WORKFLOWS $wf"
+            fi
+          done
+
+          # If there are both missing and new workflows, it might be a rename
+          if [ -n "$MISSING_WORKFLOWS" ] && [ -n "$NEW_WORKFLOWS" ]; then
+            echo "::error::❌ Workflow folder rename detected!"
+            echo "::error::  Missing workflows:$MISSING_WORKFLOWS"
+            echo "::error::  New workflows:$NEW_WORKFLOWS"
+            echo "::error::  If you need to rename a workflow, please contact support."
+            ERRORS="$ERRORS\n- Workflow folder rename detected"
+          else
+            echo "✅ No workflow folder renames detected"
+          fi
+
+          # ===========================================
+          # Check 3: No workflow folder deletions
+          # ===========================================
+          echo ""
+          echo "📋 Checking for workflow folder deletions..."
+
+          # If there are missing workflows but no new ones, it's a deletion
+          if [ -n "$MISSING_WORKFLOWS" ] && [ -z "$NEW_WORKFLOWS" ]; then
+            echo "::error::❌ Workflow folder deletion is not allowed!"
+            echo "::error::  Deleted workflows:$MISSING_WORKFLOWS"
+            echo "::error::  To delete a workflow, use the MightyBot UI instead."
+            ERRORS="$ERRORS\n- Workflow folder deletion detected"
+          else
+            echo "✅ No workflow folder deletions detected"
+          fi
+
+          # ===========================================
+          # Final result
+          # ===========================================
+          echo ""
+          if [ -n "$ERRORS" ]; then
+            echo "=============================================="
+            echo "❌ Validation FAILED"
+            echo "=============================================="
+            echo -e "Errors:$ERRORS"
+            exit 1
+          fi
+
+          # Get changed workflows for summary
+          CHANGED_WORKFLOWS=$(git diff --name-only \
+            origin/${DEFAULT_BRANCH}...HEAD -- 'workflows/' | \
+            cut -d'/' -f2 | sort -u | grep -v '^$' || true)
+
+          if [ -z "$CHANGED_WORKFLOWS" ]; then
+            echo "⚠️ No workflow changes detected"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          echo "=============================================="
+          echo "✅ Validation PASSED"
+          echo "=============================================="
+          echo "Changed workflows: $CHANGED_WORKFLOWS"
+          echo "has_changes=true" >> $GITHUB_OUTPUT
+          # Convert newlines to commas for GitHub Actions output (multi-line values break parsing)
+          CHANGED_WORKFLOWS_CSV=$(echo "$CHANGED_WORKFLOWS" | tr '\n' ',' | sed 's/,$//')
+          echo "changed_workflows=$CHANGED_WORKFLOWS_CSV" >> $GITHUB_OUTPUT
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## MightyBot Workflow Validation" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.validate.outputs.has_changes }}" == "true" ]; then
+            echo "✅ **Status:** Passed" >> $GITHUB_STEP_SUMMARY
+            echo "📦 **Branch:** \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
+            echo "🔗 **Commit:** \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### Validations" >> $GITHUB_STEP_SUMMARY
+            echo "- ✅ Valid YAML syntax" >> $GITHUB_STEP_SUMMARY
+            echo "- ✅ No file renames" >> $GITHUB_STEP_SUMMARY
+            echo "- ✅ No workflow folder renames" >> $GITHUB_STEP_SUMMARY
+            echo "- ✅ No workflow folder deletions" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "MightyBot will sync this workflow automatically." >> $GITHUB_STEP_SUMMARY
+          elif [ "${{ job.status }}" == "failure" ]; then
+            echo "❌ **Status:** Failed" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "See the job logs for details on validation failures." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ No workflow changes detected." >> $GITHUB_STEP_SUMMARY
+          fi

@@ -1,0 +1,124 @@
+name: Validate MightyBot Branch PR
+
+# Validates that PRs to mightybot/* branches only contain changes
+# to the specific workflow directory for that branch.
+# This prevents users from accidentally editing multiple workflows
+# when working on a single workflow branch.
+
+on:
+  pull_request:
+    branches:
+      - 'mightybot/**'
+
+jobs:
+  validate-scope:
+    name: Validate PR Scope
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extract workflow slug from branch name
+        id: extract
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          # Branch format: mightybot/{slug}-{YYMMDD}-{uuid8}
+          # Example: mightybot/expense-processing-250119-abc12345
+          # Extract: expense-processing
+
+          echo "Target branch: $BASE_REF"
+
+          # Remove mightybot/ prefix
+          SLUG="${BASE_REF#mightybot/}"
+
+          # Remove date-uuid suffix (last two segments: -YYMMDD-xxxxxxxx)
+          # The date is 6 digits, uuid suffix is 8 hex chars
+          SLUG=$(echo "$SLUG" | sed -E 's/-[0-9]{6}-[a-f0-9]{8}$//')
+
+          echo "Extracted workflow slug: $SLUG"
+          echo "workflow_slug=$SLUG" >> $GITHUB_OUTPUT
+          echo "allowed_path=workflows/$SLUG/" >> $GITHUB_OUTPUT
+
+      - name: Get changed files
+        id: changed
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const files = [];
+            let page = 1;
+            const perPage = 100;
+
+            // Paginate through all changed files
+            while (true) {
+              const { data } = await github.rest.pulls.listFiles({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.issue.number,
+                per_page: perPage,
+                page: page
+              });
+
+              files.push(...data.map(f => f.filename));
+
+              if (data.length < perPage) break;
+              page++;
+            }
+
+            console.log(`Found ${files.length} changed files`);
+            return files;
+
+      - name: Validate changed files are within workflow scope
+        env:
+          ALLOWED_PATH: ${{ steps.extract.outputs.allowed_path }}
+          WORKFLOW_SLUG: ${{ steps.extract.outputs.workflow_slug }}
+          CHANGED_FILES: ${{ steps.changed.outputs.result }}
+        run: |
+          echo "=============================================="
+          echo "MightyBot Branch PR Validation"
+          echo "=============================================="
+          echo ""
+          echo "Target branch: mightybot/$WORKFLOW_SLUG-*"
+          echo "Allowed path:  $ALLOWED_PATH"
+          echo ""
+
+          # Parse JSON array of changed files
+          VIOLATIONS=""
+          VALID_FILES=""
+
+          for file in $(echo "$CHANGED_FILES" | jq -r '.[]'); do
+            if [[ "$file" == ${ALLOWED_PATH}* ]]; then
+              VALID_FILES="$VALID_FILES\n  - $file"
+            else
+              VIOLATIONS="$VIOLATIONS\n  - $file"
+            fi
+          done
+
+          if [ -n "$VALID_FILES" ]; then
+            echo "Valid changes (within $ALLOWED_PATH):"
+            echo -e "$VALID_FILES"
+            echo ""
+          fi
+
+          if [ -n "$VIOLATIONS" ]; then
+            echo "=============================================="
+            echo "ERROR: PR contains changes outside workflow scope"
+            echo "=============================================="
+            echo ""
+            echo "This branch (mightybot/$WORKFLOW_SLUG-*) only allows"
+            echo "changes to files within: $ALLOWED_PATH"
+            echo ""
+            echo "The following files are NOT allowed:"
+            echo -e "$VIOLATIONS"
+            echo ""
+            echo "----------------------------------------------"
+            echo "How to fix:"
+            echo "----------------------------------------------"
+            echo "1. Remove changes to files outside $ALLOWED_PATH"
+            echo "2. Create separate PRs for changes to other workflows"
+            echo "3. If you need to modify multiple workflows, target"
+            echo "   the 'main' or 'develop' branch instead"
+            echo ""
+            exit 1
+          fi
+
+          echo "=============================================="
+          echo "SUCCESS: All changes are within workflow scope"
+          echo "=============================================="
