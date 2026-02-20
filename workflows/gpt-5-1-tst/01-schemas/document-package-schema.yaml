@@ -8,16 +8,8 @@ schema_definition:
     properties:
         draw_id:
             type: string
-        extraction_confidence:
-            type: number
         inspection_percent_complete:
             type: number
-        inspection_photo_count:
-            type: string
-        is_conditional_waiver:
-            type: boolean
-        line_item_photo_matches:
-            type: string
     required:
         - deal_id
         - document_id
