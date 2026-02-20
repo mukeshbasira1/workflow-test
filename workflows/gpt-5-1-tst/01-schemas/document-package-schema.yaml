@@ -6,10 +6,10 @@ last_modified_by: mukesh@mightybot.ai
 schema_definition:
     additionalProperties: false
     properties:
+        deal_id:
+            type: number
         draw_id:
             type: string
-        inspection_percent_complete:
-            type: number
     required:
         - deal_id
         - document_id
