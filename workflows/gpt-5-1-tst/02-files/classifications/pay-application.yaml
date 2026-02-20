@@ -2,6 +2,6 @@ accepted_file_types:
     - .pdf
     - .xlsx
 description: G702/G703 AIA pay applications from general contractors
-entity_schema_id: bfae4dba-d2ef-44ed-9042-958161105ffd
+entity_schema_id: b86a0981-ffe8-4dbf-8cc3-bd2e2d6a75e2
 extraction_model: null
-extraction_schema: document_package_schema
+extraction_schema: draw-and-funding-amounts
