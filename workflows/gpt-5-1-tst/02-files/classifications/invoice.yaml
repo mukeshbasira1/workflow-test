@@ -2,6 +2,6 @@ accepted_file_types:
     - .pdf
     - .docx
 description: Individual subcontractor and vendor invoices
-entity_schema_id: b86a0981-ffe8-4dbf-8cc3-bd2e2d6a75e2
+entity_schema_id: null
 extraction_model: null
-extraction_schema: draw-and-funding-amounts
+extraction_schema: null
