@@ -49,6 +49,7 @@ schema_definition:
         workflow_status:
             type: string
     required:
+        - deal_id
         - draw_id
         - document_id
     type: object
