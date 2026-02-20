@@ -12,6 +12,7 @@ schema_definition:
             type: string
     required:
         - deal_id
+        - deal_id
         - document_id
     type: object
 title: Document Package Schema
