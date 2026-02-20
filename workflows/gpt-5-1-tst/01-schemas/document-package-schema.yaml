@@ -20,8 +20,6 @@ schema_definition:
             type: boolean
         line_item_photo_matches:
             type: string
-        retainage_percentage:
-            type: number
     required:
         - deal_id
         - document_id
