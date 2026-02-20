@@ -22,8 +22,6 @@ schema_definition:
             type: string
         extraction_confidence:
             type: number
-        file_name:
-            type: string
         gps_verified_photos:
             type: string
         inspection_percent_complete:
@@ -40,8 +38,6 @@ schema_definition:
             type: number
         revised_budget_date:
             type: string
-        risk_score:
-            type: number
         vendor_name:
             type: string
         workflow_status:
