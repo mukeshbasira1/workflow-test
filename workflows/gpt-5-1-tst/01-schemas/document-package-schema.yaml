@@ -6,8 +6,6 @@ last_modified_by: mukesh@mightybot.ai
 schema_definition:
     additionalProperties: false
     properties:
-        critical_issues_count:
-            type: string
         draw_id:
             type: string
         extraction_confidence:
