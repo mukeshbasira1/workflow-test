@@ -42,8 +42,6 @@ schema_definition:
             type: string
         risk_score:
             type: number
-        status:
-            type: string
         vendor_name:
             type: string
         workflow_status:
