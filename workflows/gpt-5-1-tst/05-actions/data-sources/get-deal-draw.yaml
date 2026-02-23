@@ -1,0 +1,4 @@
+variable_mappings:
+    mappings:
+        "0":
+            webhook_field_path: deal_id
