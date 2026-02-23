@@ -1,4 +1,4 @@
 variable_mappings:
     mappings:
         "0":
-            webhook_field_path: deal_id
+            webhook_field_path: draw_id
