@@ -1,0 +1,58 @@
+# Workflow view configuration
+config:
+    actions:
+        primary:
+            - trigger_run
+        secondary:
+            - edit
+            - close
+    header:
+        badge_field: status
+        subtitle_field: name
+        title_field: entity_id
+    navigation:
+        on_run_click: null
+    related:
+        show_linked_instances: true
+        show_shared_data: true
+    tabs:
+        - id: overview
+          label: Overview
+          widgets:
+            - config:
+                fields:
+                    - entity_id
+                    - status
+                    - created_at
+                    - updated_at
+                    - run_count
+                    - file_count
+              data_source: instance
+              type: key_value
+            - config:
+                title: Metadata
+              data_source: metadata
+              type: key_value
+        - id: data
+          label: Entity Data
+          widgets:
+            - data_source: entity_data
+              type: json_viewer
+        - id: runs
+          label: Runs
+          widgets:
+            - data_source: runs
+              type: run_list
+        - id: files
+          label: Files
+          widgets:
+            - data_source: files
+              type: file_list
+description: Portfolio monitoring dashboard - what needs attention across all work
+display_name: detail
+framework: REACT
+is_default: false
+output_format: MFE
+persona: INTERNAL
+sort_order: 0
+view_type: entity_detail
