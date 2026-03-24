@@ -1,0 +1,168 @@
+name: Validate MightyBot Branch PR
+
+# Validates that PRs to mightybot/* branches only contain changes
+# to the specific workflow directory for that branch.
+#
+# Detects the workflow slug by comparing the target branch against main,
+# then ensures PR changes are scoped to workflows/<slug>/ and views/<slug>/.
+
+on:
+  pull_request_target:
+    branches:
+      - 'mightybot/**'
+
+permissions:
+  pull-requests: read
+  contents: read
+
+jobs:
+  validate-scope:
+    name: Validate PR Scope
+    runs-on: ubuntu-latest
+    steps:
+      - name: Detect workflow scope from target branch
+        id: detect-scope
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const baseBranch = context.payload.pull_request.base.ref;
+            console.log(`Target branch: ${baseBranch}`);
+
+            // Compare the target mightybot/* branch against the default branch
+            const { data: comparison } = await github.rest.repos.compareCommitsWithBasehead({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              basehead: `main...${baseBranch}`,
+            });
+
+            // Extract unique workflow slugs from both workflows/ and views/ dirs
+            const slugs = new Set();
+            for (const file of comparison.files || []) {
+              const match = file.filename.match(/^(?:workflows|views)\/([^/]+)\//);
+              if (match) {
+                slugs.add(match[1]);
+              }
+            }
+
+            const slugArray = [...slugs];
+            console.log(`Detected workflow slug(s) from branch diff: ${slugArray.join(', ')}`);
+            console.log(`Files changed on target branch: ${comparison.files?.length || 0}`);
+
+            if (slugArray.length === 0) {
+              core.setFailed(
+                'No workflow/view changes found vs main'
+              );
+              return;
+            }
+
+            // mightybot/* branches should only manage one workflow
+            if (slugArray.length > 1) {
+              core.warning(
+                `Multiple slugs detected: ${slugArray.join(', ')}`
+              );
+            }
+
+            const slug = slugArray[0];
+            core.setOutput('workflow_slug', slug);
+
+            // Build allowed path prefixes (both workflows/ and views/)
+            const allowedPrefixes = [`workflows/${slug}/`, `views/${slug}/`];
+            core.setOutput('allowed_prefixes', JSON.stringify(allowedPrefixes));
+            console.log(`Allowed path prefixes: ${allowedPrefixes.join(', ')}`);
+
+      - name: Get PR changed files
+        id: changed
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const files = [];
+            let page = 1;
+            const perPage = 100;
+
+            // Paginate through all changed files
+            while (true) {
+              const { data } = await github.rest.pulls.listFiles({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.issue.number,
+                per_page: perPage,
+                page: page
+              });
+
+              files.push(...data.map(f => f.filename));
+
+              if (data.length < perPage) break;
+              page++;
+            }
+
+            console.log(`Found ${files.length} changed files in PR`);
+            return files;
+
+      - name: Validate changed files are within workflow scope
+        env:
+          WORKFLOW_SLUG: ${{ steps.detect-scope.outputs.workflow_slug }}
+          ALLOWED_PREFIXES: ${{ steps.detect-scope.outputs.allowed_prefixes }}
+          CHANGED_FILES: ${{ steps.changed.outputs.result }}
+        run: |
+          echo "=============================================="
+          echo "MightyBot Branch PR Validation"
+          echo "=============================================="
+          echo ""
+          echo "Workflow slug: $WORKFLOW_SLUG"
+          echo "Allowed prefixes: $ALLOWED_PREFIXES"
+          echo ""
+
+          # Build allowed prefix list
+          PREFIXES=$(echo "$ALLOWED_PREFIXES" | jq -r '.[]')
+
+          # Parse JSON array of changed files
+          VIOLATIONS=""
+          VALID_FILES=""
+
+          for file in $(echo "$CHANGED_FILES" | jq -r '.[]'); do
+            ALLOWED=false
+            for prefix in $PREFIXES; do
+              if [[ "$file" == ${prefix}* ]]; then
+                ALLOWED=true
+                break
+              fi
+            done
+
+            if [ "$ALLOWED" = true ]; then
+              VALID_FILES="$VALID_FILES\n  - $file"
+            else
+              VIOLATIONS="$VIOLATIONS\n  - $file"
+            fi
+          done
+
+          if [ -n "$VALID_FILES" ]; then
+            echo "Valid changes:"
+            echo -e "$VALID_FILES"
+            echo ""
+          fi
+
+          if [ -n "$VIOLATIONS" ]; then
+            echo "=============================================="
+            echo "ERROR: PR contains changes outside workflow scope"
+            echo "=============================================="
+            echo ""
+            echo "This branch only allows changes to the '$WORKFLOW_SLUG' workflow."
+            echo "Allowed paths: workflows/$WORKFLOW_SLUG/ and views/$WORKFLOW_SLUG/"
+            echo ""
+            echo "The following files are NOT allowed:"
+            echo -e "$VIOLATIONS"
+            echo ""
+            echo "----------------------------------------------"
+            echo "How to fix:"
+            echo "----------------------------------------------"
+            echo "1. Remove changes to files outside the allowed paths"
+            echo "2. Create separate PRs for changes to other workflows"
+            echo "3. If you need to modify multiple workflows, target"
+            echo "   the 'main' or 'develop' branch instead"
+            echo ""
+            exit 1
+          fi
+
+          echo "=============================================="
+          echo "SUCCESS: All changes are within workflow scope"
+          echo "=============================================="

@@ -1,0 +1,72 @@
+name: MightyBot View Build
+
+# Safety check for view code on pull requests.
+# Runs npm install + npm run build on changed views to catch errors before merge.
+# MightyBot builds views directly after template commit — this is a PR gate only.
+
+on:
+  pull_request_target:
+
+jobs:
+  check:
+    name: View Build Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Detect changed views
+        id: detect
+        run: |
+          CHANGED_VIEWS=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- 'views/' \
+            | grep -E '^views/[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+/' \
+            | cut -d'/' -f1-3 | sort -u || true)
+          if [ -z "$CHANGED_VIEWS" ]; then
+            echo "No view changes detected"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "Changed views: $CHANGED_VIEWS"
+            VIEWS_JSON=$(echo "$CHANGED_VIEWS" \
+              | jq -R -s -c 'split("\n") | map(select(length > 0))')
+            echo "changed_views=$VIEWS_JSON" >> $GITHUB_OUTPUT
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build changed views
+        if: steps.detect.outputs.has_changes == 'true'
+        env:
+          CI: true
+        run: |
+          FAILED=0
+          for view in $(echo '${{ steps.detect.outputs.changed_views }}' | jq -r '.[]'); do
+            echo "Building $view..."
+            cd "$view"
+            echo "@mightybot-ai:registry=https://npm.pkg.github.com" >> .npmrc
+            echo "//npm.pkg.github.com/:_authToken=${{ secrets.MIGHTYBOT_NPM_TOKEN }}" >> .npmrc
+            if [ -f "package-lock.json" ]; then npm ci; else npm install; fi
+            NODE_ENV=production BUILD_MODE=mfe npm run build || FAILED=1
+            cd - > /dev/null
+          done
+          exit $FAILED
+
+  gate:
+    name: View Build Gate
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [check]
+    steps:
+      - name: Check results
+        run: |
+          if [[ "${{ needs.check.result }}" == "failure" ]]; then
+            echo "View build check failed"
+            exit 1
+          fi
+          echo "All view checks passed"
