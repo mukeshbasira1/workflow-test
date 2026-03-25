@@ -1,0 +1,61 @@
+created_by: mukesh@mightybot.ai
+description: null
+is_active: true
+is_primary: true
+is_public: false
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        coverage_amount:
+            description: Requested coverage amount
+            type: number
+        customer_email:
+            description: Customer email address
+            type: string
+        customer_name:
+            description: Full name of the customer
+            type: string
+        end_date:
+            description: Policy end date
+            format: date
+            type: string
+        policy_name:
+            description: Specific policy name or product
+            type: string
+        policy_type:
+            description: Type of policy being requested
+            enum:
+                - insurance
+                - health
+                - auto
+                - home
+                - life
+            type: string
+        priority:
+            description: Request priority level
+            enum:
+                - low
+                - medium
+                - high
+                - urgent
+            type: string
+        request_id:
+            description: Unique identifier for the policy request
+            type: string
+        risk_details:
+            description: Additional risk information or details
+            type: string
+        start_date:
+            description: Policy start date
+            format: date
+            type: string
+    required:
+        - request_id
+        - policy_type
+        - customer_name
+        - customer_email
+    type: object
+title: Polci
+type: WEBHOOK
+version: "1.0"
