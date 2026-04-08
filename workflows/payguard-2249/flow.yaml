@@ -9,6 +9,12 @@ deleted_at: null
 description: PayGuard garnishment compliance workflow
 display_name: null
 enterprise_id: 3a4b96b9-8a95-43fb-ad3a-66fa12d0efae
+file_processing:
+    convert_unsupported: false
+    document_scope_mode: page_level
+    enable_prompt_caching: false
+    extraction_model: Mightybot-12172025
+    processor: null
 name: PayGuard 2249
 name_slug: payguard-2249
 required_permissions: []
