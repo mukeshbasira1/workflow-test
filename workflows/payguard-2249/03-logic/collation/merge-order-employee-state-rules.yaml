@@ -1,0 +1,11 @@
+# Collation rule configuration
+config:
+    aggregation: NONE
+    confidence_threshold: 0.8
+    input_context:
+        classification_ids:
+            - e0780432-1aec-4d61-afa8-d0c4958932d0
+            - 40abe4b4-53ee-48ab-8734-877a99ffc02c
+    prompt: Merge the garnishment order data, employee earnings profile, and state garnishment rules into a single calculation context. Key the merged record by case_number + employee_id. Ensure all three data sources are present  if any is missing, report it.
+description: Merge garnishment order, employee earnings, and state rules into calculation context keyed by case_number + employee_id.
+position: 0
