@@ -1,0 +1,15 @@
+# Workflow configuration
+agent_type: policy_agent
+branch_name: mightybot/payguard-local-260408-08e28773
+config:
+    name: PayGuard Local
+created_by: f3607278-1155-4d5b-be63-0bbb374d6efb
+current_version_number: 0
+deleted_at: null
+description: PayGuard garnishment compliance workflow
+display_name: null
+enterprise_id: 3a4b96b9-8a95-43fb-ad3a-66fa12d0efae
+name: PayGuard Local
+name_slug: payguard-local
+required_permissions: []
+tenant_id: df24983b-d3e0-4064-9b34-773d1027127c
