@@ -1,0 +1,95 @@
+created_by: mukesh@mightybot.ai
+description: Primary extraction schema  populated from court-issued garnishment order PDFs. The state field is the profile routing key.
+is_active: true
+is_primary: false
+is_public: false
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        balance_remaining:
+            description: Total balance remaining on the judgment
+            type: number
+        case_number:
+            description: Court case number
+            type: string
+        creditor_name:
+            description: Plaintiff/judgment creditor name
+            type: string
+        debtor_name:
+            description: Full name of the employee/debtor as on the order
+            type: string
+        debtor_ssn_last4:
+            description: Last 4 of SSN for employee matching
+            type: string
+        effective_date:
+            description: Date garnishment takes effect (YYYY-MM-DD)
+            type: string
+        employer_name:
+            description: Name of the employer/garnishee
+            type: string
+        expiration_date:
+            description: Null = until further order of the court
+            type: string
+        interest_rate_pct:
+            description: Annual interest rate on judgment (e.g., 0.06 for 6%)
+            type: number
+        is_child_support_arrears:
+            description: Arrears > 12 weeks raises CCPA ceiling (55/65% vs 50/60%)
+            type: boolean
+        is_head_of_household:
+            description: Critical for FL (complete exemption) and CA (50% reduction)
+            type: boolean
+        issuing_court:
+            description: Full name of the issuing court
+            type: string
+        order_type:
+            description: Classification of garnishment  determines CCPA ceiling and calculation path
+            enum:
+                - CONSUMER_CREDITOR
+                - CHILD_SUPPORT
+                - IRS_TAX_LEVY
+                - STATE_TAX_LEVY
+                - FEDERAL_STUDENT_LOAN
+                - BANKRUPTCY
+                - FEDERAL_DEBT_AWG
+            type: string
+        ordered_amount:
+            description: Fixed dollar amount ordered per pay period (null if percentage-based)
+            type: number
+        ordered_percentage:
+            description: Percentage ordered (null if fixed amount)
+            type: number
+        priority_position:
+            description: Position in multi-order stack (0 = only/first order)
+            type: integer
+        raw_text:
+            description: Full extracted text from court order  kept for audit provenance
+            type: string
+        state:
+            description: Two-letter state code  THE PROFILE ROUTING KEY
+            enum:
+                - CA
+                - TX
+                - NY
+                - OH
+                - FL
+                - IL
+                - NJ
+                - PA
+                - GA
+                - NC
+            type: string
+        supports_second_family:
+            description: Supporting second family lowers CCPA ceiling (50/55% vs 60/65%)
+            type: boolean
+    required:
+        - state
+        - order_type
+        - case_number
+        - debtor_name
+        - employer_name
+    type: object
+title: GarnishmentOrder
+type: WORKFLOW
+version: "1.0"
