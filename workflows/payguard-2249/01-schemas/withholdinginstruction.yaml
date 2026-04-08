@@ -1,0 +1,80 @@
+created_by: mukesh@mightybot.ai
+description: Final output  payroll-ready instruction with Why-Trail audit. Goes to ADP/Paychex/Finch.
+is_active: true
+is_primary: false
+is_public: false
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        applied_max:
+            description: min(federal, state)  most protective wins
+            type: number
+        case_number:
+            description: Court case number
+            type: string
+        compliance_status:
+            description: Outcome classification
+            enum:
+                - COMPLIANT
+                - PROHIBITED
+                - EXEMPT
+                - REQUIRES_REVIEW
+                - INSUFFICIENT_DATA
+            type: string
+        effective_date:
+            description: When withholding begins
+            type: string
+        employee_id:
+            description: Payroll system employee ID
+            type: string
+        employee_retained:
+            description: disposable_earnings - final_withholding
+            type: number
+        federal_max:
+            description: Federal CCPA maximum for this order type
+            type: number
+        final_withholding:
+            description: min(applied_max, ordered)  the actual amount
+            type: number
+        garnishment_type:
+            description: Order type classification
+            type: string
+        ordered_amount:
+            description: What the court ordered
+            type: number
+        pay_frequency:
+            enum:
+                - WEEKLY
+                - BIWEEKLY
+                - SEMIMONTHLY
+                - MONTHLY
+            type: string
+        protected_floor:
+            description: Statutory minimum the employee must retain
+            type: number
+        state_max:
+            description: State-specific maximum
+            type: number
+        warnings:
+            description: Compliance warnings
+            type: array
+        why_trail:
+            description: Every dollar traces to a statute
+            type: array
+        withholding_amount:
+            description: Dollar amount to withhold per pay period
+            type: number
+    required:
+        - case_number
+        - employee_id
+        - pay_frequency
+        - effective_date
+        - garnishment_type
+        - compliance_status
+        - final_withholding
+        - withholding_amount
+    type: object
+title: WithholdingInstruction
+type: WORKFLOW
+version: "1.0"
