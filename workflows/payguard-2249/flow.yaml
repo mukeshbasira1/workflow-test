@@ -1,0 +1,15 @@
+# Workflow configuration
+agent_type: policy_agent
+branch_name: mightybot/payguard-2249-260408-ff67e17e
+config:
+    name: PayGuard 2249
+created_by: f3607278-1155-4d5b-be63-0bbb374d6efb
+current_version_number: 0
+deleted_at: null
+description: PayGuard garnishment compliance workflow
+display_name: null
+enterprise_id: 3a4b96b9-8a95-43fb-ad3a-66fa12d0efae
+name: PayGuard 2249
+name_slug: payguard-2249
+required_permissions: []
+tenant_id: df24983b-d3e0-4064-9b34-773d1027127c
