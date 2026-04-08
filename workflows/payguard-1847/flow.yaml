@@ -5,7 +5,7 @@ config:
     name: PayGuard 1847
 created_by: f3607278-1155-4d5b-be63-0bbb374d6efb
 current_version_number: 0
-deleted_at: null
+deleted_at: 2026-04-08T12:44:09.372283
 description: PayGuard garnishment compliance workflow
 display_name: null
 enterprise_id: 3a4b96b9-8a95-43fb-ad3a-66fa12d0efae
