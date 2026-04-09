@@ -9,6 +9,10 @@ deleted_at: null
 description: PayGuard garnishment compliance workflow
 display_name: null
 enterprise_id: 3a4b96b9-8a95-43fb-ad3a-66fa12d0efae
+exit_actions:
+    description: Define how the agent responds to policy outcomes
+    name: Agent Actions
+    name_slug: agent-actions
 file_processing:
     convert_unsupported: false
     document_scope_mode: page_level
