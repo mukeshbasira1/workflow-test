@@ -7,4 +7,4 @@ accepted_file_types:
     - .png
 description: Court-issued consumer creditor garnishment order. PDF or scanned document.
 extraction_model: Mightybot-12172025
-extraction_schema: null
+extraction_schema: GarnishmentOrder
