@@ -15,7 +15,7 @@ exit_actions:
     name_slug: agent-actions
 file_processing:
     convert_unsupported: false
-    document_scope_mode: page_level
+    document_scope_mode: whole_file
     enable_prompt_caching: false
     extraction_model: Mightybot-12172025
     processor: null
