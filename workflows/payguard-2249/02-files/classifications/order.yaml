@@ -1,0 +1,8 @@
+accepted_file_types:
+    - .jpg
+    - .jpeg
+    - .png
+    - .pdf
+description: Classify order-related documents
+extraction_model: null
+extraction_schema: null
