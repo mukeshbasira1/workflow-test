@@ -5,4 +5,4 @@ accepted_file_types:
     - .pdf
 description: Classify order-related documents
 extraction_model: null
-extraction_schema: null
+extraction_schema: EmployeeEarningsProfile
