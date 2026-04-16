@@ -1,0 +1,47 @@
+created_by: mukesh@mightybot.ai
+description: Verify state, order_type, case_number, debtor_name, employer_name are non-null.
+is_active: true
+is_primary: false
+is_public: false
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        confidence:
+            anyOf:
+                - type: string
+                - type: "null"
+            default: null
+        is_valid:
+            anyOf:
+                - format: enum
+                  type: string
+                - type: "null"
+            default: null
+        issues:
+            anyOf:
+                - type: string
+                - type: "null"
+            default: null
+        passed_checks:
+            anyOf:
+                - type: string
+                - type: "null"
+            default: null
+        reasoning:
+            anyOf:
+                - format: text
+                  type: string
+                - type: "null"
+            default: null
+        status:
+            anyOf:
+                - format: enum
+                  type: string
+                - type: "null"
+            default: null
+    required: []
+    type: object
+title: Validate Presence Of Required Fields In The Data Instance Result
+type: WORKFLOW
+version: "1.0"
