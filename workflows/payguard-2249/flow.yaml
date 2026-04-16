@@ -6,7 +6,7 @@ config:
 created_by: f3607278-1155-4d5b-be63-0bbb374d6efb
 current_version_number: 0
 deleted_at: null
-description: PayGuard garnishment compliance workflow
+description: Garnishment compliance workflow — processes court-issued garnishment orders, applies federal and state-specific rules, and produces payroll-ready withholding instructions with full statutory audit trail.
 display_name: null
 enterprise_id: 3a4b96b9-8a95-43fb-ad3a-66fa12d0efae
 exit_actions:
