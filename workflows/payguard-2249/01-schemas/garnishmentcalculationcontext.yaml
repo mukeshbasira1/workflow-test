@@ -1,0 +1,295 @@
+created_by: mukesh@mightybot.ai
+description: Merged runtime context built from garnishment order extraction, employee earnings profile, and state garnishment rule data. This schema is for collation only and should not contain computed withholding outputs.
+is_active: true
+is_primary: false
+is_public: false
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        balance_remaining:
+            anyOf:
+                - type: number
+                - type: "null"
+            default: None
+            description: Remaining balance when stated on the order.
+        case_number:
+            description: Court case number from the garnishment order.
+            type: string
+        creditor_name:
+            anyOf:
+                - type: string
+                - type: "null"
+            default: None
+            description: Creditor or plaintiff name from the order when present.
+        debtor_name:
+            description: Debtor or employee name from the order.
+            type: string
+        debtor_ssn_last4:
+            anyOf:
+                - type: string
+                - type: "null"
+            default: None
+            description: Last four digits of SSN from the order when present.
+        disposable_earnings:
+            description: Disposable earnings per pay period.
+            type: number
+        effective_date:
+            anyOf:
+                - format: date
+                  type: string
+                - type: "null"
+            default: None
+            description: Order effective date when present.
+        employee_id:
+            description: Payroll system employee identifier.
+            type: string
+        employee_name:
+            anyOf:
+                - type: string
+                - type: "null"
+            default: None
+            description: Employee name from payroll data.
+        employer_name:
+            description: Employer or garnishee name from the order.
+            type: string
+        employer_processing_fee_max:
+            anyOf:
+                - type: number
+                - type: "null"
+            default: None
+            description: Maximum employer processing fee per pay period from the matched state rule.
+        excess_pct:
+            anyOf:
+                - type: number
+                - type: "null"
+            default: None
+            description: Percent applied to earnings above the protected floor when applicable.
+        existing_garnishments:
+            anyOf:
+                - type: array
+                - type: "null"
+            default: None
+            description: Existing active deductions or garnishments relevant to the employee.
+        expiration_date:
+            anyOf:
+                - format: date
+                  type: string
+                - type: "null"
+            default: None
+            description: Order expiration date when explicitly stated.
+        federal_minimum_wage:
+            anyOf:
+                - type: number
+                - type: "null"
+            default: None
+            description: Federal minimum wage used for calculations when available.
+        formula_type:
+            anyOf:
+                - enum:
+                    - LESSER_OF
+                    - GREATER_OF
+                  type: string
+                - type: "null"
+            default: None
+            description: How state law combines multiple calculation prongs.
+        gross_earnings:
+            description: Gross earnings per pay period.
+            type: number
+        hoh_complete_exemption_threshold:
+            anyOf:
+                - type: number
+                - type: "null"
+            default: None
+            description: Head-of-household complete exemption threshold when applicable.
+        hoh_reduced_pct:
+            anyOf:
+                - type: number
+                - type: "null"
+            default: None
+            description: Head-of-household reduced garnishment percentage when applicable.
+        interest_rate_pct:
+            anyOf:
+                - type: number
+                - type: "null"
+            default: None
+            description: Annual interest rate as a decimal when stated on the order.
+        is_child_support_arrears:
+            anyOf:
+                - type: boolean
+                - type: "null"
+            default: None
+            description: Whether child support arrears exceed twelve weeks.
+        is_head_of_household:
+            anyOf:
+                - type: boolean
+                - type: "null"
+            default: None
+            description: Head-of-household flag from the order or payroll data.
+        is_prohibited:
+            anyOf:
+                - type: boolean
+                - type: "null"
+            default: None
+            description: Whether the order type is prohibited under state law.
+        issuing_court:
+            anyOf:
+                - type: string
+                - type: "null"
+            default: None
+            description: Issuing court name when present.
+        local_minimum_wage:
+            anyOf:
+                - type: number
+                - type: "null"
+            default: None
+            description: Local minimum wage used when higher than state or federal.
+        medical_debt_exempt:
+            anyOf:
+                - type: boolean
+                - type: "null"
+            default: None
+            description: Whether medical debt is exempt under the matched state rule.
+        min_wage_multiplier:
+            anyOf:
+                - type: number
+                - type: "null"
+            default: None
+            description: Minimum wage multiplier used to determine the protected floor.
+        min_wage_source:
+            anyOf:
+                - enum:
+                    - FEDERAL
+                    - STATE
+                    - LOCAL_IF_HIGHER
+                    - STATE_OR_FEDERAL_HIGHER
+                  type: string
+                - type: "null"
+            default: None
+            description: Minimum wage source specified by the state rule.
+        order_type:
+            description: Garnishment order type.
+            enum:
+                - CONSUMER_CREDITOR
+                - CHILD_SUPPORT
+                - IRS_TAX_LEVY
+                - STATE_TAX_LEVY
+                - FEDERAL_STUDENT_LOAN
+                - BANKRUPTCY
+                - FEDERAL_DEBT_AWG
+            type: string
+        ordered_amount:
+            anyOf:
+                - type: number
+                - type: "null"
+            default: None
+            description: Fixed dollar withholding amount per pay period when present.
+        ordered_percentage:
+            anyOf:
+                - type: number
+                - type: "null"
+            default: None
+            description: Percentage withholding amount as a decimal when present.
+        pay_frequency:
+            description: Payroll frequency used for garnishment calculations.
+            enum:
+                - WEEKLY
+                - BIWEEKLY
+                - SEMIMONTHLY
+                - MONTHLY
+            type: string
+        pct_of_disposable:
+            anyOf:
+                - type: number
+                - type: "null"
+            default: None
+            description: State-law cap as a percent of disposable earnings when applicable.
+        pct_of_gross:
+            anyOf:
+                - type: number
+                - type: "null"
+            default: None
+            description: State-law cap as a percent of gross earnings when applicable.
+        priority_position:
+            anyOf:
+                - type: integer
+                - type: "null"
+            default: None
+            description: Priority position in a multi-order stack when explicit.
+        prohibition_statute:
+            anyOf:
+                - type: string
+                - type: "null"
+            default: None
+            description: Citation for a state-law prohibition when applicable.
+        raw_text:
+            anyOf:
+                - type: string
+                - type: "null"
+            default: None
+            description: Full extracted order text for audit and policy reasoning.
+        rule_order_type:
+            description: Order type value from the matched state rule row.
+            type: string
+        rule_state:
+            description: State value from the matched state rule row.
+            type: string
+        state:
+            description: Two-letter state code from the garnishment order.
+            enum:
+                - CA
+                - TX
+                - NY
+                - OH
+                - FL
+                - IL
+                - NJ
+                - PA
+                - GA
+                - NC
+            type: string
+        state_minimum_wage:
+            anyOf:
+                - type: number
+                - type: "null"
+            default: None
+            description: State minimum wage used for calculations when available.
+        state_of_employment:
+            anyOf:
+                - type: string
+                - type: "null"
+            default: None
+            description: Employee state of employment from payroll data.
+        statute_citation:
+            description: Primary statute citation from the matched state rule.
+            type: string
+        statute_url:
+            anyOf:
+                - format: uri
+                  type: string
+                - type: "null"
+            default: None
+            description: URL to the statute text when available.
+        supports_second_family:
+            anyOf:
+                - type: boolean
+                - type: "null"
+            default: None
+            description: Whether the employee supports a second family.
+    required:
+        - state
+        - order_type
+        - rule_state
+        - case_number
+        - debtor_name
+        - employee_id
+        - employer_name
+        - pay_frequency
+        - gross_earnings
+        - rule_order_type
+        - statute_citation
+        - disposable_earnings
+    type: object
+title: GarnishmentCalculationContext
+type: WORKFLOW
+version: "1.0"
