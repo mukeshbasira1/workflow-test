@@ -1,0 +1,109 @@
+created_by: mukesh@mightybot.ai
+description: The law book — each state's calculation parameters with statute citations. Served as a data source.
+is_active: true
+is_primary: false
+is_public: false
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        employer_processing_fee_max:
+            default: "0"
+            description: Max fee per pay period. TX=$10, OH/CA=$3
+            type: number
+        excess_pct:
+            default: "0"
+            description: '% of excess over protected floor. Federal=1.0, CA=0.40'
+            format: percentage
+            type: number
+        formula_type:
+            anyOf:
+                - enum:
+                    - LESSER_OF
+                    - GREATER_OF
+                  format: enum
+                  type: string
+                - type: "null"
+            default: null
+            description: How to combine prongs
+        hoh_complete_exemption_threshold:
+            default: "0"
+            description: Weekly earnings below this = complete exemption for HoH. FL=750
+            format: positive
+            type: number
+        hoh_reduced_pct:
+            default: "0"
+            description: HoH garnishment reduction factor. CA=0.50
+            format: percentage
+            type: number
+        is_prohibited:
+            anyOf:
+                - format: boolean
+                  type: boolean
+                - type: "null"
+            default: null
+            description: True = garnishment type illegal in this state (e.g., TX consumer)
+        medical_debt_exempt:
+            anyOf:
+                - format: boolean
+                  type: boolean
+                - type: "null"
+            default: null
+            description: 'NY CPLR 5231(b)(iv): medical debt fully exempt'
+        min_wage_multiplier:
+            default: "0"
+            description: Floor multiplier. Federal=30, CA=48, IL=45
+            format: positive
+            type: number
+        min_wage_source:
+            anyOf:
+                - enum:
+                    - FEDERAL
+                    - STATE
+                    - LOCAL_IF_HIGHER
+                    - STATE_OR_FEDERAL_HIGHER
+                  format: enum
+                  type: string
+                - type: "null"
+            default: null
+            description: Which min wage to use
+        order_type:
+            description: Which order type this rule applies to
+            type: string
+        pct_of_disposable:
+            default: "0"
+            description: Max % of disposable earnings. Federal=0.25, CA=0.20
+            format: percentage
+            type: number
+        pct_of_gross:
+            default: "0"
+            description: Max % of gross earnings. NY=0.10
+            format: percentage
+            type: number
+        prohibition_statute:
+            anyOf:
+                - type: string
+                - type: "null"
+            default: null
+            description: Statute for prohibition
+        state:
+            description: Two-letter state code
+            type: string
+        statute_citation:
+            description: Full legal citation for Why-Trail
+            type: string
+        statute_url:
+            anyOf:
+                - format: uri
+                  type: string
+                - type: "null"
+            default: null
+            description: URL to the actual statute text
+    required:
+        - state
+        - order_type
+        - statute_citation
+    type: object
+title: StateGarnishmentRule
+type: WORKFLOW
+version: "1.0"
