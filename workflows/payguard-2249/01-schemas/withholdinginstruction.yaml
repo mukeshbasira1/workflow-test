@@ -1,0 +1,223 @@
+created_by: mukesh@mightybot.ai
+description: Final output — payroll-ready instruction with Why-Trail audit. Goes to ADP/Paychex/Finch.
+is_active: true
+is_primary: false
+is_public: false
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        applied_max:
+            description: min(federal, state) — most protective limit wins
+            type: number
+        case_number:
+            description: Court case number
+            type: string
+        compliance_status:
+            description: Outcome classification
+            enum:
+                - COMPLIANT
+                - PROHIBITED
+                - EXEMPT
+                - REQUIRES_REVIEW
+                - INSUFFICIENT_DATA
+            type: string
+        disposable_earnings:
+            description: Earnings after mandatory deductions (taxes, SS, Medicare)
+            type: number
+        effective_date:
+            description: When withholding begins
+            format: date
+            type: string
+        employee_id:
+            description: Payroll system employee ID
+            type: string
+        employee_retained:
+            description: disposable_earnings minus final_withholding
+            type: number
+        federal_max:
+            description: Federal CCPA maximum for this order type
+            type: number
+        field_provenance:
+            description: Per-field reasoning and source document references. One entry per output field, documenting where the value came from and why.
+            items:
+                additionalProperties: false
+                properties:
+                    field_name:
+                        description: The output field this provenance entry is for (e.g. final_withholding, federal_max, state_max, case_number)
+                        type: string
+                    reasoning:
+                        description: How this value was derived — cite the statute, formula, data source, or extraction. Be specific.
+                        type: string
+                    source_documents:
+                        description: Documents that provided evidence for this field value
+                        items:
+                            additionalProperties: false
+                            properties:
+                                file_id:
+                                    description: File ID UUID from the FILE EXTRACTIONS section
+                                    type: string
+                                filename:
+                                    description: Original filename
+                                    type: string
+                                page_number:
+                                    description: Page number where the value was found (1-indexed)
+                                    type: integer
+                                reasoning:
+                                    description: What specifically was extracted from this page/segment for this field
+                                    type: string
+                                segment_id:
+                                    description: Segment ID UUID from the FILE EXTRACTIONS section
+                                    type: string
+                            required:
+                                - file_id
+                                - reasoning
+                                - segment_id
+                            type: object
+                        type: array
+                    value:
+                        description: The value assigned to this field, as a string for display
+                        type: string
+                required:
+                    - reasoning
+                    - field_name
+                type: object
+            type: array
+        final_withholding:
+            description: min(applied_max, ordered) — the actual dollar amount to withhold per pay period
+            type: number
+        garnishment_type:
+            description: Order type classification
+            type: string
+        gross_earnings:
+            description: Gross earnings per pay period before deductions
+            type: number
+        ordered_amount:
+            description: What the court ordered per pay period. Null if percentage-based
+            type: number
+        pay_frequency:
+            description: Pay period frequency
+            enum:
+                - WEEKLY
+                - BIWEEKLY
+                - SEMIMONTHLY
+                - MONTHLY
+            type: string
+        protected_floor:
+            description: Statutory minimum the employee must retain per pay period
+            type: number
+        state_max:
+            description: State-specific maximum
+            type: number
+        warnings:
+            description: Compliance warnings or issues found during calculation
+            items:
+                additionalProperties: false
+                properties:
+                    description:
+                        description: Detailed explanation
+                        type: string
+                    severity:
+                        description: Severity level
+                        enum:
+                            - ERROR
+                            - WARNING
+                            - INFO
+                        type: string
+                    source_documents:
+                        description: Documents related to this warning
+                        items:
+                            additionalProperties: false
+                            properties:
+                                file_id:
+                                    description: File ID UUID
+                                    type: string
+                                filename:
+                                    description: Original filename
+                                    type: string
+                                page_number:
+                                    description: Page number (1-indexed)
+                                    type: integer
+                                reasoning:
+                                    description: What triggered this warning from this document
+                                    type: string
+                                segment_id:
+                                    description: Segment ID UUID
+                                    type: string
+                            required:
+                                - file_id
+                                - reasoning
+                                - segment_id
+                            type: object
+                        type: array
+                    title:
+                        description: Short headline for the warning
+                        type: string
+                required:
+                    - title
+                    - severity
+                    - description
+                type: object
+            type: array
+        why_trail:
+            description: Step-by-step audit trail showing how the final withholding was calculated. Every dollar traces to a statute.
+            items:
+                additionalProperties: false
+                properties:
+                    calculation:
+                        description: Formula applied with input values showing the math
+                        type: string
+                    rule:
+                        description: Statute citation (e.g. Federal CCPA 15 U.S.C. § 1673, NY CPLR § 5231)
+                        type: string
+                    source_documents:
+                        description: Documents that informed this calculation step
+                        items:
+                            additionalProperties: false
+                            properties:
+                                file_id:
+                                    description: File ID UUID
+                                    type: string
+                                filename:
+                                    description: Original filename
+                                    type: string
+                                page_number:
+                                    description: Page number (1-indexed)
+                                    type: integer
+                                reasoning:
+                                    description: What was used from this document for this step
+                                    type: string
+                                segment_id:
+                                    description: Segment ID UUID
+                                    type: string
+                            required:
+                                - file_id
+                                - reasoning
+                                - segment_id
+                            type: object
+                        type: array
+                    value:
+                        description: The calculated amount for this step
+                        type: number
+                required:
+                    - rule
+                    - value
+                    - calculation
+                type: object
+            type: array
+        withholding_amount:
+            description: Dollar amount to withhold per pay period (same as final_withholding)
+            type: number
+    required:
+        - case_number
+        - employee_id
+        - pay_frequency
+        - effective_date
+        - garnishment_type
+        - compliance_status
+        - final_withholding
+        - withholding_amount
+    type: object
+title: WithholdingInstruction
+type: WORKFLOW
+version: "1.0"
