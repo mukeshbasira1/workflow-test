@@ -1,0 +1,75 @@
+created_by: mukesh@mightybot.ai
+description: Response from payroll system (Finch API or mock). Provides the numbers for garnishment calculation.
+is_active: true
+is_primary: false
+is_public: false
+last_modified_by: mukesh@mightybot.ai
+schema_definition:
+    additionalProperties: false
+    properties:
+        disposable_earnings:
+            default: "0"
+            description: Per pay period, after mandatory deductions. Per 15 USC 1672(b).
+            type: number
+        employee_id:
+            description: Payroll system employee ID
+            type: string
+        employee_name:
+            anyOf:
+                - type: string
+                - type: "null"
+            default: null
+            description: Full name from payroll for matching against debtor_name
+        existing_garnishments:
+            anyOf:
+                - type: array
+                - type: "null"
+            default: null
+            description: Currently active garnishment deductions for multi-order stacking
+        federal_minimum_wage:
+            default: "0"
+            description: Current federal min wage per FLSA
+            type: number
+        gross_earnings:
+            default: "0"
+            description: Per pay period, pre-tax/pre-deduction. NY CPLR 5231 uses this for the 10% prong.
+            type: number
+        is_head_of_household:
+            anyOf:
+                - format: boolean
+                  type: boolean
+                - type: "null"
+            default: null
+            description: 'FL: complete exemption below $750/week. CA: 50% reduced garnishment.'
+        local_minimum_wage:
+            default: "0"
+            description: City/county min wage — CA CCP 706.050(a)(2) uses local if higher than state
+            type: number
+        pay_frequency:
+            description: Determines min wage multiplier scaling
+            enum:
+                - WEEKLY
+                - BIWEEKLY
+                - SEMIMONTHLY
+                - MONTHLY
+            format: enum
+            type: string
+        state_minimum_wage:
+            default: "0"
+            description: State min wage — NY CPLR 5231(b)(i) uses greater of federal or state
+            type: number
+        state_of_employment:
+            anyOf:
+                - type: string
+                - type: "null"
+            default: null
+            description: May differ from order jurisdiction
+    required:
+        - employee_id
+        - pay_frequency
+        - gross_earnings
+        - disposable_earnings
+    type: object
+title: EmployeeEarningsProfile
+type: WORKFLOW
+version: "1.0"
