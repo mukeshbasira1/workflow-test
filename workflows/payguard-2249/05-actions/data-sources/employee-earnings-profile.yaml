@@ -19,5 +19,14 @@ scope: shared
 ssl_enabled: false
 tool_mode: AUDIT
 type: API
-variable_mappings: null
+variable_mappings:
+    mappings:
+        - schema_name: GarnishmentOrder
+          source_type: webhook_field
+          variable_name: debtor_name
+          webhook_field_path: debtor_name
+        - schema_name: GarnishmentOrder
+          source_type: webhook_field
+          variable_name: debtor_ssn_last4
+          webhook_field_path: debtor_ssn_last4
 variables: null
