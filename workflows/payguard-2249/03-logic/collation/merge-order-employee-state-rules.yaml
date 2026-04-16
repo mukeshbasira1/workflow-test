@@ -4,7 +4,23 @@ config:
     confidence_threshold: 0.8
     input_context:
         classification_ids:
-            - Consumer Creditor Garnishment Order
-    prompt: Merge the garnishment order data, employee earnings profile, and state garnishment rules into a single calculation context. Key the merged record by case_number + employee_id. Ensure all three data sources are present  if any is missing, report it.
-description: Merge garnishment order, employee earnings, and state rules into calculation context keyed by case_number + employee_id.
+            - 384be01f-0af1-4c62-a18e-831de30a94e3
+    prompt: |-
+        Merge the garnishment order data, employee earnings profile, and state garnishment rules into a single runtime context keyed by case_number + employee_id. This is a collation step only. Do not calculate withholding amounts, legal maxima, compliance outcomes, warnings, or why-trail steps.
+
+        Your job is only to merge and normalize inputs from these three sources into one record:
+        - GarnishmentOrder
+        - EmployeeEarningsProfile
+        - StateGarnishmentRule
+
+        COLLATION REQUIREMENTS:
+        1. Include source fields from all three inputs in the merged output.
+        2. Preserve the original order values and payroll values; do not transform them into computed legal outputs.
+        3. Map the state rule's `state` field to `rule_state` and `order_type` to `rule_order_type` in the merged context so source values are not ambiguous.
+        4. If any required source is missing, still return the partial merged context with the available fields and leave missing fields as null.
+        5. Do not invent values.
+        6. Do not populate any of these computed fields because they do not belong in this schema: federal_max, state_max, applied_max, protected_floor, final_withholding, withholding_amount, employee_retained, compliance_status, why_trail, warnings, or field_provenance.
+
+        This output is a preparation context for later validation, preprocessing, and reconciliation rules.
+description: Merge garnishment order, employee earnings, and state rules into a single non-computed runtime context keyed by case_number + employee_id.
 position: 0
