@@ -17,12 +17,7 @@ exit_actions:
     name: Exit Two
     name_slug: exit-two
     prompt_synced_at: null
-file_processing:
-    convert_unsupported: false
-    document_scope_mode: page_level
-    extraction_model: Mightybot-v5
-    native_spreadsheet_extraction: true
-    processor: null
+file_processing: null
 name: PAAS2141 E2E A
 name_slug: paas2141-e2e-a
 project_identifier: []
