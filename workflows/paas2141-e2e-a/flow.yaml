@@ -1,0 +1,32 @@
+# Workflow configuration
+agent_type: policy_agent
+config:
+    name: PAAS2141 E2E A
+    workflow_model_tiers:
+        agent: default
+        extraction: default
+created_by: f3607278-1155-4d5b-be63-0bbb374d6efb
+current_version_number: 0
+deleted_at: null
+deployment_source: platform
+description: null
+enterprise_id: 3a4b96b9-8a95-43fb-ad3a-66fa12d0efae
+exit_actions:
+    agent_prompt_source: SURVEY
+    description: Define how the agent responds to policy outcomes
+    name: Exit Two
+    name_slug: exit-two
+    prompt_synced_at: null
+file_processing:
+    convert_unsupported: false
+    document_scope_mode: page_level
+    extraction_model: Mightybot-v5
+    native_spreadsheet_extraction: true
+    processor: null
+name: PAAS2141 E2E A
+name_slug: paas2141-e2e-a
+project_identifier: []
+required_permissions: []
+signal_config: {}
+tool_mode: FULL_AUTO
+vcs_repo_config: null
