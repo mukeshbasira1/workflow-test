@@ -112,16 +112,22 @@ jobs:
           echo ""
           echo "📋 Checking for workflow folder renames..."
 
-          # Get workflow folders in base branch
-          git fetch origin ${DEFAULT_BRANCH} --depth=1 2>/dev/null || true
-          BASE_WORKFLOWS=$(git ls-tree -d --name-only \
-            origin/${DEFAULT_BRANCH} workflows/ 2>/dev/null \
+          # Compare full directory listings at merge-base vs HEAD to
+          # detect folder-level adds/removes. Using merge-base avoids
+          # false positives from mightybot/* parent branches, and
+          # comparing actual directory existence (instead of inferring
+          # from diff --name-status) avoids false positives when a
+          # single file is added to or deleted from a multi-file folder.
+          MERGE_BASE=$(git merge-base origin/${DEFAULT_BRANCH} HEAD || echo "HEAD")
+
+          # Get workflow folders at merge-base
+          BASE_WORKFLOWS=$(git ls-tree -d --name-only $MERGE_BASE workflows/ 2>/dev/null \
             | cut -d'/' -f2 | sort -u || true)
 
           # Get workflow folders in current branch
           CURRENT_WORKFLOWS=$(ls -d workflows/*/ 2>/dev/null | cut -d'/' -f2 | sort -u || true)
 
-          # Find workflows that existed in base but not in current (potential renames or deletes)
+          # Folders that existed at merge-base but not on current branch
           MISSING_WORKFLOWS=""
           for wf in $BASE_WORKFLOWS; do
             if [ -n "$wf" ] && ! echo "$CURRENT_WORKFLOWS" | grep -q "^${wf}$"; then
@@ -129,7 +135,7 @@ jobs:
             fi
           done
 
-          # Find workflows that exist in current but not in base (new or renamed-to)
+          # Folders that exist on current branch but not at merge-base
           NEW_WORKFLOWS=""
           for wf in $CURRENT_WORKFLOWS; do
             if [ -n "$wf" ] && ! echo "$BASE_WORKFLOWS" | grep -q "^${wf}$"; then
@@ -177,8 +183,12 @@ jobs:
           SLUG_REGEX='^[a-z0-9]+(-[a-z0-9]+)*$'
           INVALID_NAMES=""
 
-          # Only check added or modified files (not deleted)
-          echo "$CHANGED_FILES" | while IFS= read -r file && [ -n "$file" ]; do
+          # Get added or modified files (exclude deleted) in this branch
+          CHANGED_FILES=$(git diff --name-only --diff-filter=AM \
+            origin/${DEFAULT_BRANCH}...HEAD -- 'workflows/' || true)
+
+          # Use here-string to avoid subshell (pipe | while loses variable scope)
+          while IFS= read -r file && [ -n "$file" ]; do
             # Extract just the filename without path and extension
             BASENAME=$(basename "$file")
             NAME="${BASENAME%.*}"
@@ -193,7 +203,7 @@ jobs:
               echo "::error file=$file::❌ Invalid filename: '$BASENAME' — must be a valid slug (lowercase letters, numbers, and hyphens only)"
               INVALID_NAMES="$INVALID_NAMES\n- $file ($NAME)"
             fi
-          done
+          done <<< "$CHANGED_FILES"
 
           if [ -n "$INVALID_NAMES" ]; then
             echo ""
